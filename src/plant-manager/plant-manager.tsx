@@ -1,11 +1,6 @@
 // @ts-ignore
 import * as React from 'react';
-
-enum Plant {
-    POTHOS = 'Pothos',
-    SPIDER = 'Spider plant',
-    MONSTRA = 'Monstra'
-}
+const ourPlants = ['Pothos', 'Spider plant', 'Monstra'];
 
 interface PlantManagerProps{};
 interface PlantManagerState {plants: (string|null)[], highlight: string|null, inputValue: string}
