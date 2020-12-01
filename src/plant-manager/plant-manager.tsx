@@ -3,7 +3,7 @@ import * as React from 'react';
 // @ts-ignore
 import Select from 'react-select';
 
-type option = {value: string, label: string}
+export type option = {value: string, label: string}
 
 const options: option[] = [
     { value: 'pothos', label: 'Pothos' },

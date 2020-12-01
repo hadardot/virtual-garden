@@ -1,10 +1,13 @@
 import React from 'react';
 import Sketch from "../sketch"
-import {PlantManager} from '../plant-manager/plant-manager'
+import {option, PlantManager} from '../plant-manager/plant-manager'
 import './app.css';
 
+interface AppState {
+    selectedOptions: option[];
 
-class App extends React.Component{
+}
+class App extends React.Component<any,AppState>{
 
     render() {
         return (
