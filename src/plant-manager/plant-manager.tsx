@@ -1,45 +1,45 @@
 // @ts-ignore
 import * as React from 'react';
-const ourPlants = ['Pothos', 'Spider plant', 'Monstra'];
+// @ts-ignore
+import Select from 'react-select';
 
-interface PlantManagerProps{};
-interface PlantManagerState {plants: (string|null)[], highlight: string|null, inputValue: string}
+type option = {value: string, label: string}
 
+const options: option[] = [
+    { value: 'pothos', label: 'Pothos' },
+    { value: 'spider', label: 'Spider plant' },
+    { value: 'monstra', label: 'Monstra' }
+]
 
-export class PlantManager extends React.Component<PlantManagerProps, PlantManagerState> {
-    constructor(props: PlantManagerProps) {
+interface PlantManagerState{
+    selectedOptions: option[];
+}
+
+export class PlantManager extends React.Component<any, any> {
+    constructor(props: any) {
         super(props);
-        this.state = {plants: [], highlight: null, inputValue: ""};
-        this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+        this.state = {
+            selectedOptions: [options[0]]
+            };};
+
+    onChange = (selectedOptions: any) => {
+        console.log(selectedOptions);
+        this.setState({selectedOptions})
+
     }
-
-
-    // @ts-ignore
-    handleChange(event: any) {
-        this.setState({inputValue: event.target.value});
-    }
-
-    // @ts-ignore
-    handleSubmit(event: any) {
-        this.setState({plants: [...this.state.plants, this.state.inputValue], inputValue:""})
-        event.preventDefault();
-    }
-
-
-
     render(){
-        const {plants} = this.state;
         return (
             <div>
-                {plants && plants.map(plant => <div>{plant}</div>)}
-                <form onSubmit={this.handleSubmit}>
-                    <label>
-                        Name:
-                        <input type="text" value={this.state.inputValue} onChange={this.handleChange} />
-                    </label>
-                    <input type="submit" value="Submit" />
-                </form>
+                <Select
+                    defaultValue={this.state.selectedOptions}
+                    isMulti
+                    name="plants"
+                    options={options}
+                    className="basic-multi-select"
+                    value={this.state.selectedOptions}
+                    classNamePrefix="select"
+                    onChange={this.onChange}
+                />
             </div>
 
         )
