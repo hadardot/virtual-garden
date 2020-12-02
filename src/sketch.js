@@ -30,7 +30,7 @@ class Sketch extends React.Component {
 
         p.draw = () => {
             const time = 1;
-            let data = 3;
+            let data = this.props.selectedOptions.length;
 
             p.noFill();
 

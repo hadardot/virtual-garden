@@ -6,16 +6,26 @@ import Select from 'react-select';
 export type option = {value: string, label: string}
 
 const options: option[] = [
-    { value: 'pothos', label: 'Pothos' },
-    { value: 'spider', label: 'Spider plant' },
-    { value: 'monstra', label: 'Monstra' }
+    { value: 'pothos', label: 'פותוס' },
+    { value: 'spider', label: 'ירקה' },
+    { value: 'monstra', label: 'מונסטרה' },
+    { value: 'lavender', label: 'לוונדר' },
+    { value: 'bat-sheva', label: 'בת-שבע' },
+    { value: 'paperumia', label: 'פפרומיה' },
+    { value: 'ficus', label: 'פיקוס' },
+    { value: 'alovera', label: 'אלוורה' },
+
 ]
 
 interface PlantManagerState{
     selectedOptions: option[];
 }
 
-export class PlantManager extends React.Component<any, any> {
+interface PlantManagerProps {
+    onOptionsUpdate(options: option[]): void;
+}
+
+export class PlantManager extends React.Component<PlantManagerProps, any> {
     constructor(props: any) {
         super(props);
         this.state = {
@@ -24,6 +34,7 @@ export class PlantManager extends React.Component<any, any> {
 
     onChange = (selectedOptions: any) => {
         console.log(selectedOptions);
+        this.props.onOptionsUpdate(selectedOptions)
         this.setState({selectedOptions})
 
     }
