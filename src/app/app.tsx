@@ -1,10 +1,10 @@
 import React from 'react';
 import Sketch from "../sketch"
-import {option, PlantManager} from '../plant-manager/plant-manager'
+import {plant, PlantManager} from '../plant-manager/plant-manager'
 import './app.css';
 
 interface AppState {
-    selectedOptions: option[];
+    selectedOptions: plant[];
 
 }
 class App extends React.Component<any,AppState>{
@@ -15,7 +15,7 @@ class App extends React.Component<any,AppState>{
             selectedOptions: []
         };};
 
-    onOptionsUpdate = (selectedOptions: option[]) => {
+    onOptionsUpdate = (selectedOptions: plant[]) => {
         console.log("here with", selectedOptions)
         this.setState({selectedOptions})
     }

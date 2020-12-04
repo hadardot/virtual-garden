@@ -3,54 +3,53 @@ import * as React from 'react';
 // @ts-ignore
 import Select from 'react-select';
 
-export type option = {value: string, label: string}
+export type plant = {value: string, label: string, datesAdded: Date[]}
 
-const options: option[] = [
-    { value: 'pothos', label: 'פותוס' },
-    { value: 'spider', label: 'ירקה' },
-    { value: 'monstra', label: 'מונסטרה' },
-    { value: 'lavender', label: 'לוונדר' },
-    { value: 'bat-sheva', label: 'בת-שבע' },
-    { value: 'paperumia', label: 'פפרומיה' },
-    { value: 'ficus', label: 'פיקוס' },
-    { value: 'alovera', label: 'אלוורה' },
-
+export const plants: plant[] = [
+    { value: 'pothos', label: 'פותוס', datesAdded: [] },
+    { value: 'spider', label: 'ירקה' , datesAdded: []},
+    { value: 'monstra', label: 'מונסטרה' , datesAdded: []},
+    { value: 'lavender', label: 'לוונדר' , datesAdded: []},
+    { value: 'bat-sheva', label: 'בת-שבע' , datesAdded: []},
+    { value: 'paperumia', label: 'פפרומיה' , datesAdded: []},
+    { value: 'ficus', label: 'פיקוס' , datesAdded: []},
+    { value: 'alovera', label: 'אלוורה' , datesAdded: []},
 ]
 
 interface PlantManagerState{
-    selectedOptions: option[];
+    currentPlants: plant[];
 }
 
 interface PlantManagerProps {
-    onOptionsUpdate(options: option[]): void;
+    onOptionsUpdate(options: plant[]): void;
 }
 
 export class PlantManager extends React.Component<PlantManagerProps, any> {
     constructor(props: any) {
         super(props);
         this.state = {
-            selectedOptions: [options[0]]
+            currentPlants: plants
             };};
 
-    onChange = (selectedOptions: any) => {
-        console.log(selectedOptions);
-        this.props.onOptionsUpdate(selectedOptions)
-        this.setState({selectedOptions})
+    addPlant = (plant: any) => {
+        const date = new Date();
+        // @ts-ignore
+        const current = this.state.currentPlants.map(curr => curr.label  === plant.label ? {...curr, datesAdded: [...curr.datesAdded, date]} : curr)
+        this.setState({currentPlants: current});
+        this.props.onOptionsUpdate(current);
+
 
     }
+
     render(){
-        return (
-            <div>
-                <Select
-                    defaultValue={this.state.selectedOptions}
-                    isMulti
-                    name="plants"
-                    options={options}
-                    className="basic-multi-select"
-                    value={this.state.selectedOptions}
-                    classNamePrefix="select"
-                    onChange={this.onChange}
-                />
+        // @ts-ignore
+        return (<div>{this.state.currentPlants.map(plant =>
+                    <div>
+                    <button onClick={()=>this.addPlant(plant)}>
+                        {plant.label} - {plant.datesAdded.length}
+                    </button>
+                    </div>
+                        )}
             </div>
 
         )
