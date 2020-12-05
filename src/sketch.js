@@ -1,5 +1,6 @@
 import React from 'react'
 import p5 from 'p5'
+import {plants} from "./plant-manager/plant-manager";
 
 class Sketch extends React.Component {
     constructor(props) {
@@ -28,35 +29,44 @@ class Sketch extends React.Component {
             //let direction = 0;
         }
 
+
+
+
+
         p.draw = () => {
             const time = 1;
-            let data = this.props.selectedOptions.length;
+            // let data = this.props.gardensPlants.length;
+
 
             p.noFill();
 
             p.background(256);
             this.setState({counter: this.state.counter + time});
-            if (data <= 3)
-            {
-                flower1(data);
-            }
-            else
-            {
-                flower1(3);
-                flower2(data); //4_5
-            }
-            if (data >= 6)
-            {
-                flower3();
-            }
-            if (data >= 7)
-            {
-                flower4();
-            }
-            if (data >= 8)
-            {
-                flower5();
-            }
+
+            this.props.gardensPlants.map(plant => drawPlant(plant));
+
+
+            // if (data <= 3)
+            // {
+            //     flower1(data);
+            // }
+            // else
+            // {
+            //     flower1(3);
+            //     flower2(data); //4_5
+            // }
+            // if (data >= 6)
+            // {
+            //     flower3();
+            // }
+            // if (data >= 7)
+            // {
+            //     flower4();
+            // }
+            // if (data >= 8)
+            // {
+            //     flower5();
+            // }
 
         }
 
@@ -73,6 +83,33 @@ class Sketch extends React.Component {
                 p.stroke(100);
             }
 
+        }
+
+        const drawPlant = (plant) => {
+            switch(plant.value){
+                case ("pothos"):
+                    drawPothos()
+
+                default:
+                    drawPothos();
+
+            }
+
+        }
+
+        const drawPothos = () => {
+            console.log("im drawing pothossss~");
+            console.log(this.state.counter);
+            let pase = this.state.counter/2;
+            for ( let i = 0 ; i < 2 ; i+= 1)
+            {
+                let n = pase - i*50;
+                if (n  < 0)
+                {n = 0;}
+                p.stroke(n%256);
+                p.circle(200, 200,n%256);
+                p.stroke(100);
+            }
         }
 
         const flower2 = (num) =>

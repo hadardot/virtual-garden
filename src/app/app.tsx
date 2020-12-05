@@ -1,10 +1,10 @@
 import React from 'react';
 import Sketch from "../sketch"
-import {plant, PlantManager} from '../plant-manager/plant-manager'
 import './app.css';
+import {plant, PlantManager} from "../plant-manager/plant-manager";
 
 interface AppState {
-    selectedOptions: plant[];
+    gardensPlants: plant[];
 
 }
 class App extends React.Component<any,AppState>{
@@ -12,19 +12,23 @@ class App extends React.Component<any,AppState>{
     constructor(props: any) {
         super(props);
         this.state = {
-            selectedOptions: []
+            gardensPlants: []
         };};
 
-    onOptionsUpdate = (selectedOptions: plant[]) => {
-        console.log("here with", selectedOptions)
-        this.setState({selectedOptions})
+    onOptionsUpdate = (newPlant: plant) => {
+        console.log("here with", newPlant)
+        // @ts-ignore
+        this.setState({gardensPlants: [...this.state.gardensPlants, newPlant]})
     }
 
     render() {
         return (
             <div className="App">
-                <Sketch selectedOptions={this.state.selectedOptions}/>
+                <Sketch gardensPlants={this.state.gardensPlants}/>
                 <PlantManager onOptionsUpdate={this.onOptionsUpdate}/>
+                <div>
+                    {this.state.gardensPlants.map(plant => <button>hi</button>)}
+                </div>
             </div>
         );
     }
