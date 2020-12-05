@@ -22,7 +22,7 @@ class Sketch extends React.Component {
             p.createCanvas(400, 400);
             p.stroke(0);
             p.strokeWeight(0.5);
-            p.frameRate(60);
+            p.frameRate(30);
             p.background(256);
             p.rectMode(p.CENTER);
             //let alternate = 1;
