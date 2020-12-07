@@ -16,12 +16,8 @@ export const plants: plant[] = [
     { value: 'alovera', label: 'אלוורה' },
 ]
 
-interface PlantManagerState{
-
-}
-
 interface PlantManagerProps {
-    onOptionsUpdate(options: plant): void;
+    addPlant(options: plant): void;
 }
 
 export class PlantManager extends React.Component<PlantManagerProps, any> {
@@ -31,7 +27,7 @@ export class PlantManager extends React.Component<PlantManagerProps, any> {
     addPlant = (plant: any) => {
         // @ts-ignore
         plant.dateAdded = new Date();
-        this.props.onOptionsUpdate(plant);
+        this.props.addPlant(plant);
 
 
     }
