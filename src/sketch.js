@@ -98,8 +98,6 @@ class Sketch extends React.Component {
         }
 
         const drawPothos = () => {
-            console.log("im drawing pothossss~");
-            console.log(this.state.counter);
             let pase = this.state.counter/2;
             for ( let i = 0 ; i < 2 ; i+= 1)
             {

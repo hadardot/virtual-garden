@@ -26,8 +26,9 @@ export class PlantManager extends React.Component<PlantManagerProps, any> {
 
     addPlant = (plant: any) => {
         // @ts-ignore
-        plant.dateAdded = new Date();
-        this.props.addPlant(plant);
+        const plantToAdd = JSON.parse(JSON.stringify(plant));//deep copy
+        plantToAdd.dateAdded = new Date();
+        this.props.addPlant(plantToAdd);
 
 
     }

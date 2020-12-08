@@ -2,6 +2,7 @@ import React from 'react';
 import Sketch from "../sketch"
 import './app.css';
 import {plant, PlantManager} from "../plant-manager/plant-manager";
+import {GardenManager} from "../garden-manager/garden-manager";
 
 interface GardenState {
     gardensPlants: plant[];
@@ -16,29 +17,25 @@ class Garden extends React.Component<any,GardenState>{
         };};
 
     addPlantToGarden = (newPlant: plant) => {
-        console.log("here with", newPlant)
         // @ts-ignore
         this.setState({gardensPlants: [...this.state.gardensPlants, newPlant]})
     }
 
     removePlantFromGarden = (plantToRemove: plant) => {
-        console.log("here with", plantToRemove)
         // @ts-ignore
         const gardensPlants = this.state.gardensPlants.filter(plant => plant.dateAdded !== plantToRemove.dateAdded);
         this.setState({gardensPlants})
     }
 
-    onMouseOverPlantFromGarden = (plantToRemove: plant) => {
-        console.log("here with", plantToRemove)
+    onMouseOverPlantFromGarden = (currentPlant: plant) => {
         // @ts-ignore
-        const gardensPlants = this.state.gardensPlants.map(plant => plant.dateAdded === plantToRemove.dateAdded ? {...plant, isHover: true}: plant);
+        const gardensPlants = this.state.gardensPlants.map(plant => plant.dateAdded === currentPlant.dateAdded ? {...plant, isHover: true}: plant);
         this.setState({gardensPlants})
     }
 
-    onMouseOutPlantFromGarden = (plantToRemove: plant) => {
-        console.log("here with", plantToRemove)
+    onMouseOutPlantFromGarden = (currentPlant: plant) => {
         // @ts-ignore
-        const gardensPlants = this.state.gardensPlants.map(plant => plant.dateAdded === plantToRemove.dateAdded ? {...plant, isHover: false}: plant);
+        const gardensPlants = this.state.gardensPlants.map(plant => plant.dateAdded === currentPlant.dateAdded ? {...plant, isHover: false}: plant);
         this.setState({gardensPlants})
     }
 
@@ -47,9 +44,7 @@ class Garden extends React.Component<any,GardenState>{
             <div className="App">
                 <Sketch gardensPlants={this.state.gardensPlants}/>
                 <PlantManager addPlant={this.addPlantToGarden}/>
-                <div>
-                    {this.state.gardensPlants.map(plant => <button>hi</button>)}
-                </div>
+                <GardenManager gardensPlants={this.state.gardensPlants} removePlantFromGarden={this.removePlantFromGarden} onMouseOutPlantFromGarden={this.onMouseOutPlantFromGarden} onMouseOverPlantFromGarden={this.onMouseOverPlantFromGarden} />
             </div>
         );
     }
