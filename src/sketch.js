@@ -201,6 +201,8 @@ class Sketch extends React.Component {
             p.stroke(p.abs(p.sin(this.state.counter/360))*128 + 128);
             p.rect(200, 200,s,s);
         }
+
+
     }
 
     componentDidMount() {
