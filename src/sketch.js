@@ -75,6 +75,9 @@ class Sketch extends React.Component {
                 case ("pothos"):
                     drawPothos(age)
                     return;
+                case ("ficus"):
+                    drawFicus(age);
+                    return;
 
                 case ("lavender"):
                     drawlavender(age)
@@ -98,7 +101,7 @@ class Sketch extends React.Component {
                     return;
 
                 default:
-                    drawPothos(age);
+                    return;
             }
 
         }
@@ -160,6 +163,27 @@ class Sketch extends React.Component {
             p.rotate(p.radians(-(age*100000)%360));
             p.translate(-200,-200);
         }
+
+        const flower5 = () =>
+        {
+            //p.stroke(220);
+            let s = p.sin(this.state.counter/360)*256;
+            p.stroke(p.abs(p.sin(this.state.counter/360))*128 + 128);
+            p.rect(200, 200,s,s);
+        }
+
+        const drawFicus = (age) => {
+            p.translate(200,200);
+            p.rotate(p.radians((age*100000)%360));
+            p.triangle(0, 0, age+2, age+10, -age-2, age+10);
+            p.rotate(p.radians(-(age*100000)%360));
+            p.translate(-200,-200);
+        }
+
+        const drawCalthea = (age) => {
+
+        }
+
 
 
     }

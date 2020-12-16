@@ -14,6 +14,7 @@ export const plants: plant[] = [
     { value: 'paperumia', label: 'פפרומיה' },
     { value: 'ficus', label: 'פיקוס' },
     { value: 'alovera', label: 'אלוורה' },
+    {value: 'calathea', label:'קלתאה'}
 ]
 
 interface PlantManagerProps {
