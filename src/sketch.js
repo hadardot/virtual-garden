@@ -16,58 +16,30 @@ class Sketch extends React.Component {
     // This uses p5's instance mode for sketch creation and namespacing
     Sketch = (p) => {
 
+        const gardenStartDate = new Date();
+
         // Native p5 functions work as they would normally but prefixed with
         // a p5 object "p"
         p.setup = () => {
             p.createCanvas(400, 400);
-            p.stroke(0);
+            p.stroke(100);
             p.strokeWeight(0.5);
+            p.fill(0,0,0,10);
             p.frameRate(30);
             p.background(256);
             p.rectMode(p.CENTER);
+
+            //console.log(gardenStartDate);
+
             //let alternate = 1;
             //let direction = 0;
         }
 
-
-
-
-
         p.draw = () => {
             const time = 1;
-            // let data = this.props.gardensPlants.length;
-
-
-            p.noFill();
-
             p.background(256);
             this.setState({counter: this.state.counter + time});
-
             this.props.gardensPlants.map(plant => drawPlant(plant));
-
-
-            // if (data <= 3)
-            // {
-            //     flower1(data);
-            // }
-            // else
-            // {
-            //     flower1(3);
-            //     flower2(data); //4_5
-            // }
-            // if (data >= 6)
-            // {
-            //     flower3();
-            // }
-            // if (data >= 7)
-            // {
-            //     flower4();
-            // }
-            // if (data >= 8)
-            // {
-            //     flower5();
-            // }
-
         }
 
         const flower1 = (num) =>
@@ -85,29 +57,37 @@ class Sketch extends React.Component {
 
         }
 
+        const GetPlantAge = (plantDateAdded) => {
+            let meeli =  new Date() - plantDateAdded;
+            let sec = meeli/1000;
+            let minutes = sec/60;
+            let size = minutes / 50;
+            return size > 400 ? 400:size;
+        }
+
+
         const drawPlant = (plant) => {
+
+            const age = GetPlantAge(plant.dateAdded)
             switch(plant.value){
                 case ("pothos"):
-                    drawPothos()
-
+                    drawPothos(age)
                 default:
-                    drawPothos();
-
+                    drawPothos(age);
             }
 
         }
 
-        const drawPothos = () => {
-            let pase = this.state.counter/2;
-            for ( let i = 0 ; i < 2 ; i+= 1)
-            {
-                let n = pase - i*50;
-                if (n  < 0)
-                {n = 0;}
-                p.stroke(n%256);
-                p.circle(200, 200,n%256);
-                p.stroke(100);
-            }
+        const drawPothos = (age) => {
+
+
+            p.translate(200,200);
+            p.rotate(p.radians((age*100000)%360));
+            p.rect(0, 0, (10 + 300)/2 ,10 + 300 );
+            p.rotate(p.radians(-(age*100000)%360));
+            p.translate(-200,-200);
+
+            //p.circle(200, 200,age + 10);
         }
 
         const flower2 = (num) =>
