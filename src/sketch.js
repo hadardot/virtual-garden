@@ -28,6 +28,8 @@ class Sketch extends React.Component {
             p.frameRate(30);
             p.background(256);
             p.rectMode(p.CENTER);
+            p.ellipseMode(p.CENTER);
+
 
             //console.log(gardenStartDate);
 
@@ -76,105 +78,89 @@ class Sketch extends React.Component {
                 case ("ficus"):
                     drawFicus(age);
                     return;
+
+                case ("lavender"):
+                    drawlavender(age)
+                    return;
+
+                case ("batsheva"):
+                    drawBatsheva(age)
+                    return;
+
+                case ("paperumia"):
+                    drawPaperumia(age)
+                    return;
+
+
+                case ("spider"):
+                    drawSpider(age)
+                    return;
+
+                case ("alovera"):
+                    drawAlovera(age)
+                    return;
+
                 default:
                     return;
             }
 
         }
 
-        const drawPothos = (age) => {
-
-
+        const drawlavender = (age) => {
             p.translate(200,200);
             p.rotate(p.radians((age*100000)%360));
-            p.rect(0, 0, (10 + 300)/2 ,10 + 300 );
+            p.ellipse(0, 0, (10 + age)/2 ,10 + age );
             p.rotate(p.radians(-(age*100000)%360));
             p.translate(-200,-200);
 
-            //p.circle(200, 200,age + 10);
         }
 
-        const flower2 = (num) =>
-        {
-            let c = this.state.counter;
-            if (c < 256)
-            {
-                return;
-            }
-            if (c < 410 )
-            {
-                p.stroke(510-c); // 510-c
-            }
-
-            //   even = -1;
-            //   if (mum%2 == 0)
-            //   {
-            //       even = 1;
-            //   }
-
-            // if ((this.state.counter)%256 == 0)
-            // {
-            //      this.alternate *= -1;
-            //  }
-            // this.direction += alternate;
-            let direction = 210;
-
-
-            let pase2 = this.state.counter/2; //pase
-
+        const drawPothos = (age) => {
             p.translate(200,200);
-            p.rotate(p.radians(pase2));
-            p.rect(0, 0,direction/3,180);
-            p.rotate(p.radians(-pase2));
-            if (num > 4)  // num%2 !== 0
-            {
-                p.rotate(p.radians(-pase2));
-                p.rect(0, 0, direction/3,180);
-                p.rotate(p.radians(pase2));
-            }
-            p.stroke(100);
-            p.translate(-200,-200);   // ?
-        }
-
-        const flower3 = () =>
-        {
-            let pase3 = this.state.counter/8;
-
-            p.translate(200,200);
-            p.rotate(p.radians(pase3));
-
-
-            let a = p.sin((this.state.counter/360))*35 + 60;
-
-            p.line(0,0,a,a);
-            p.line(0,0,-a,-a);
-            p.line(0,0,-a,a);
-            p.line(0,0,a,-a);
-
-
-            p.rotate(p.radians(-pase3));
+            p.rotate(p.radians((age*100000)%360));
+            p.rect(0, 0, (10 + age)/2 ,10 + age );
+            p.rotate(p.radians(-(age*100000)%360));
             p.translate(-200,-200);
         }
 
-        const flower4 = () =>
-        {
-            let pase4 = this.state.counter/8;
-
+        const drawBatsheva = (age) => {
             p.translate(200,200);
-            p.rotate(p.radians(45));
-            p.rotate(p.radians(-pase4));
+            p.rotate(p.radians((age*100000)%360));
+            p.rect(0, 0, 10 + age, 10 + age );
+            p.rotate(p.radians(-(age*100000)%360));
+            p.translate(-200,-200);
+        }
+
+        const drawPaperumia = (age) => {
+            p.translate(200,200);
+            p.rotate(p.radians((age*100000)%360));
+            p.rect(0, 0, (10 + 300) /5,10 + 300 );
+            p.rotate(p.radians(-(age*100000)%360));
+            p.translate(-200,-200);
+        }
 
 
-            let a = p.cos((this.state.counter/360))*35 + 60;
+        const drawSpider = (age) => {
+            p.translate(200,200);
+            p.rotate(p.radians((age*100000)%360));
+            let s = age + 10;
+            p.line(-s,-s, s,s);
+            p.rotate(p.radians(-(age*100000)%360));
+            p.translate(-200,-200);
+        }
 
-            p.line(0,0,a,a);
-            p.line(0,0,-a,-a);
-            p.line(0,0,-a,a);
-            p.line(0,0,a,-a);
 
+        const drawAlovera = (age) => {
+            let radius = age; // (0 - 400)
+            let numOfPlus = (age / 20) + 1;
+            p.translate(200,200);
+            p.rotate(p.radians((age*100000)%360));
 
-            p.rotate(p.radians(pase4));
-            p.rotate(p.radians(-45));
+            for (let i = 0; i < numOfPlus; i++){
+                p.circle(radius,0,10);
+            }
+
+            p.rotate(p.radians(-(age*100000)%360));
             p.translate(-200,-200);
         }
 

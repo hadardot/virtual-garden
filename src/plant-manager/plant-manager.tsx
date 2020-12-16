@@ -10,7 +10,7 @@ export const plants: plant[] = [
     { value: 'spider', label: 'ירקה' },
     { value: 'monstra', label: 'מונסטרה'},
     { value: 'lavender', label: 'לוונדר'},
-    { value: 'bat-sheva', label: 'בת-שבע' },
+    { value: 'batsheva', label: 'בת-שבע' },
     { value: 'paperumia', label: 'פפרומיה' },
     { value: 'ficus', label: 'פיקוס' },
     { value: 'alovera', label: 'אלוורה' },
