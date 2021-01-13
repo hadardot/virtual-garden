@@ -3,7 +3,7 @@ import p5 from 'p5'
 import {plants} from "./plant-manager/plant-manager";
 
 const fast = 50000;
-const mika = 'hadar';
+const TWO_PI = Math.PI * 2;
 class Sketch extends React.Component {
     constructor(props) {
         super(props)
@@ -41,9 +41,9 @@ class Sketch extends React.Component {
 
         p.draw = () => {
             p.translate(200,200);
-            const time = 1;
-            p.background(256);
-            this.setState({counter: this.state.counter + time});
+            // const time = 1;
+            p.background(0);
+            // this.setState({counter: this.state.counter + time});
             this.props.gardensPlants.map(plant => drawPlant(plant));
             p.translate(-200,-200);
         }
@@ -58,109 +58,25 @@ class Sketch extends React.Component {
 
 
         const drawPlant = (plant) => {
+            const age = GetPlantAge(plant.dateAdded);
+            drawPerlinNoiseCircle();
+        }
 
-            const age = GetPlantAge(plant.dateAdded)
-            switch(plant.value){
-                case ("pothos"):
-                    drawPothos(age)
-                    return;
-                case ("ficus"):
-                    drawFicus(age);
-                    return;
-
-                case ("lavender"):
-                    drawLavender(age)
-                    return;
-
-                case ("batsheva"):
-                    drawBatsheva(age)
-                    return;
-
-                case ("paperumia"):
-                    drawPaperumia(age)
-                    return;
-
-
-                case ("spider"):
-                    drawSpider(age)
-                    return;
-
-                // case ("alovera"):
-                //     drawAlovera(age)
-                //     return;
-
-                default:
-                    return;
+        const drawPerlinNoiseCircle = (N = 1) =>{
+            p.stroke(255);
+            p.noFill();
+            p.beginShape();
+            let noiseMax = 10; //todo: play with valuse
+            for (let a = 0; a < TWO_PI; a+=0.1){
+                let xoff = p.map(Math.cos(a), -1, 1, 0, noiseMax);
+                let yoff = p.map(Math.sin(a), -1, 1, 0, noiseMax);
+                let r = p.map(p.noise(xoff, yoff), 0, 1, 100, 200);
+                let x = r*Math.cos(a);
+                let y = r*Math.sin(a);
+                p.vertex(x, y)
             }
-
+            p.endShape(p.CLOSE);
         }
-
-
-        const drawLavender = (age) => {
-            let size = age*fast;
-            p.rotate(p.radians((age*100000)%360));
-            p.ellipse(0, 0, (10 + size)/2 ,10 + size );
-            p.rotate(p.radians(-(age*100000)%360));
-        }
-
-        const drawPothos = (age) => {
-            let size = age*fast;
-            p.rotate(p.radians((age*100000)%360));
-            p.rect(0, 0, (10 + size)/2 ,10 + size );
-            p.rotate(p.radians(-(age*100000)%360));
-        }
-
-        const drawBatsheva = (age) => {
-            let size = age*fast;
-            p.rotate(p.radians((age*100000)%360));
-            p.rect(0, 0, 10 + size, 10 + size );
-            p.rotate(p.radians(-(age*100000)%360));
-        }
-
-        const drawPaperumia = (age) => {
-            let size = age*fast;
-            p.rotate(p.radians((age*100000)%360));
-            p.rect(0, 0, (10 + size) /5,10 + size );
-            p.rotate(p.radians(-(age*100000)%360));
-
-        }
-
-
-        const drawSpider = (age) => {
-            let size = age*fast;
-            p.rotate(p.radians((age*100000)%360));
-            let s = size + 10;
-            p.line(-s,-s, s,s);
-            p.rotate(p.radians(-(age*100000)%360));
-        }
-
-
-        // const drawAlovera = (age) => {
-        //     let radius = age; // (0 - 400)
-        //     let numOfPlus = (age / 20) + 1;
-        //     p.translate(200,200);
-        //     p.rotate(p.radians((age*100000)%360));
-        //
-        //     for (let i = 0; i < numOfPlus; i++){
-        //         p.circle(radius,0,10);
-        //     }
-        //
-        //     p.rotate(p.radians(-(age*100000)%360));
-        //     p.translate(-200,-200);
-        // }
-
-        const drawFicus = (age) => {
-            let size = age*fast;
-            p.rotate(p.radians((age*100000)%360));
-            p.triangle(0, 0, (size+10)/3, size+10, (-size-10)/3, size+10);
-            p.rotate(p.radians(-(age*100000)%360));
-        }
-
-        const drawCalthea = (age) => {
-
-        }
-
-
 
     }
 
