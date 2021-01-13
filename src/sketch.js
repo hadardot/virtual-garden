@@ -3,7 +3,7 @@ import p5 from 'p5'
 import {plants} from "./plant-manager/plant-manager";
 
 const fast = 50000;
-
+const mika = 'hadar';
 class Sketch extends React.Component {
     constructor(props) {
         super(props)
