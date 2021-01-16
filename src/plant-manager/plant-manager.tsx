@@ -3,10 +3,10 @@ import * as React from 'react';
 // @ts-ignore
 import Select from 'react-select';
 
-export type plant = {value: string, label: string, dateAdded?: Date, isHover?: boolean}
+export type plant = {value: string, label: string, dateAdded?: Date, isHover?: boolean, color?: string}
 
 export const plants: plant[] = [
-    { value: 'pothos', label: 'פותוס'},
+    { value: 'pothos', label: 'Pothos'},
     { value: 'spider', label: 'ירקה' },
     { value: 'monstra', label: 'מונסטרה'},
     { value: 'lavender', label: 'לוונדר'},

@@ -4,6 +4,8 @@ import {plants} from "./plant-manager/plant-manager";
 
 const fast = 50000;
 const TWO_PI = Math.PI * 2;
+let zoff =0;
+
 class Sketch extends React.Component {
     constructor(props) {
         super(props)
@@ -45,6 +47,7 @@ class Sketch extends React.Component {
             p.background(0);
             // this.setState({counter: this.state.counter + time});
             this.props.gardensPlants.map(plant => drawPlant(plant));
+            zoff += 0.08;
             p.translate(-200,-200);
         }
 
@@ -58,19 +61,25 @@ class Sketch extends React.Component {
 
 
         const drawPlant = (plant) => {
+            let radius = 150;
+            let z = zoff;
+            if (plant.value === 'pothos'){
+                radius -= 20;
+                z += 0.08;
+            }
             const age = GetPlantAge(plant.dateAdded);
-            drawPerlinNoiseCircle();
+            drawPerlinNoiseCircle(10, z, radius, radius/7, 0.05);
         }
 
-        const drawPerlinNoiseCircle = (N = 1) =>{
+        const drawPerlinNoiseCircle = (noiseMax, zOff, radius, radiusStep, aStep) =>{
             p.stroke(255);
             p.noFill();
             p.beginShape();
-            let noiseMax = 10; //todo: play with valuse
-            for (let a = 0; a < TWO_PI; a+=0.1){
+            // let noiseMax = 10; //todo: play with valuse
+            for (let a = 0; a < TWO_PI; a+=aStep){
                 let xoff = p.map(Math.cos(a), -1, 1, 0, noiseMax);
                 let yoff = p.map(Math.sin(a), -1, 1, 0, noiseMax);
-                let r = p.map(p.noise(xoff, yoff), 0, 1, 100, 200);
+                let r = p.map(p.noise(xoff, yoff, zOff), 0, 1, radius-radiusStep, radius+radiusStep);
                 let x = r*Math.cos(a);
                 let y = r*Math.sin(a);
                 p.vertex(x, y)
