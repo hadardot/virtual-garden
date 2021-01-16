@@ -3,8 +3,9 @@ import * as React from 'react';
 // @ts-ignore
 import Select from 'react-select';
 
-export type plant = {value: string, label: string, dateAdded?: Date, isHover?: boolean, color?: string}
-
+export type plant = {value: string, label: string, dateAdded?: Date, isHover?: boolean, color?: string, index?: number}
+let currentIndex = 0;
+export let abandonedIndex = [];
 export const plants: plant[] = [
     { value: 'pothos', label: 'Pothos',color: "#ffe3f9"},
     { value: 'spider', label: 'ירקה' ,color: "#f64483"},
@@ -21,6 +22,7 @@ interface PlantManagerProps {
     addPlant(options: plant): void;
 }
 
+
 export class PlantManager extends React.Component<PlantManagerProps, any> {
     constructor(props: any) {
         super(props);};
@@ -29,9 +31,8 @@ export class PlantManager extends React.Component<PlantManagerProps, any> {
         // @ts-ignore
         const plantToAdd = JSON.parse(JSON.stringify(plant));//deep copy
         plantToAdd.dateAdded = new Date();
+        // plantToAdd.index = findPlantIndex();
         this.props.addPlant(plantToAdd);
-
-
     }
 
     render(){

@@ -66,10 +66,11 @@ class Sketch extends React.Component {
             let radius = 10;
             let a = 0.01;
             let noise = 4;
+            I = plant.index;
             p.stroke(plant.color);
             let rr = radius + I*10;
             drawPerlinNoiseCircle(noise, zOff + (I / 5),radius =  rr, rr/6 + 3 , a);
-            I ++;
+            // I ++;
 
 
         }
