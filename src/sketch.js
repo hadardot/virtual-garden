@@ -4,7 +4,8 @@ import {plants} from "./plant-manager/plant-manager";
 
 const fast = 50000;
 const TWO_PI = Math.PI * 2;
-let zoff =0;
+let zOff =0;
+let I = 0;
 
 class Sketch extends React.Component {
     constructor(props) {
@@ -27,7 +28,7 @@ class Sketch extends React.Component {
         p.setup = () => {
             p.createCanvas(400, 400);
             p.stroke(100);
-            p.strokeWeight(0.5);
+            p.strokeWeight(1);
             p.fill(0,0,0,10);
             p.frameRate(30);
             p.background(256);
@@ -42,12 +43,13 @@ class Sketch extends React.Component {
         }
 
         p.draw = () => {
-            p.translate(200,200);
-            // const time = 1;
             p.background(0);
+            p.translate(200,200);
+            I = 0;
+            // const time = 1;
             // this.setState({counter: this.state.counter + time});
             this.props.gardensPlants.map(plant => drawPlant(plant));
-            zoff += 0.08;
+            zOff += 0.03;
             p.translate(-200,-200);
         }
 
@@ -61,21 +63,21 @@ class Sketch extends React.Component {
 
 
         const drawPlant = (plant) => {
-            let radius = 150;
-            let z = zoff;
-            if (plant.value === 'pothos'){
-                radius -= 20;
-                z += 0.08;
-            }
-            const age = GetPlantAge(plant.dateAdded);
-            drawPerlinNoiseCircle(10, z, radius, radius/7, 0.05);
+            let radius = 10;
+            let a = 0.01;
+            let noise = 4;
+            p.stroke(plant.color);
+            let rr = radius + I*10;
+            drawPerlinNoiseCircle(noise, zOff + (I / 5),radius =  rr, rr/6 + 3 , a);
+            I ++;
+
+
         }
 
         const drawPerlinNoiseCircle = (noiseMax, zOff, radius, radiusStep, aStep) =>{
-            p.stroke(255);
+
             p.noFill();
             p.beginShape();
-            // let noiseMax = 10; //todo: play with valuse
             for (let a = 0; a < TWO_PI; a+=aStep){
                 let xoff = p.map(Math.cos(a), -1, 1, 0, noiseMax);
                 let yoff = p.map(Math.sin(a), -1, 1, 0, noiseMax);

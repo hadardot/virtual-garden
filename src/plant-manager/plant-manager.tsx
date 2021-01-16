@@ -6,15 +6,15 @@ import Select from 'react-select';
 export type plant = {value: string, label: string, dateAdded?: Date, isHover?: boolean, color?: string}
 
 export const plants: plant[] = [
-    { value: 'pothos', label: 'Pothos'},
-    { value: 'spider', label: 'ירקה' },
-    { value: 'monstra', label: 'מונסטרה'},
-    { value: 'lavender', label: 'לוונדר'},
-    { value: 'batsheva', label: 'בת-שבע' },
-    { value: 'paperumia', label: 'פפרומיה' },
-    { value: 'ficus', label: 'פיקוס' },
-    { value: 'alovera', label: 'אלוורה' },
-    {value: 'calathea', label:'קלתאה'}
+    { value: 'pothos', label: 'Pothos',color: "#ffe3f9"},
+    { value: 'spider', label: 'ירקה' ,color: "#f64483"},
+    { value: 'monstra', label: 'מונסטרה',color: "#ff71a4"},
+    { value: 'lavender', label: 'לוונדר',color: "#ff84e0"},
+    { value: 'batsheva', label: 'בת-שבע' ,color: "#b75bc6"},
+    { value: 'paperumia', label: 'פפרומיה' ,color: "#6898d9"},
+    { value: 'ficus', label: 'פיקוס' ,color: "#00b094"},
+    { value: 'alovera', label: 'אלוורה' ,color: "#246d77"},
+    {value: 'calathea', label:'קלתאה',color: "#ffe3f9"}
 ]
 
 interface PlantManagerProps {
