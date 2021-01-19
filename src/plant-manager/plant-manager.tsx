@@ -44,12 +44,10 @@ export class PlantManager extends React.Component<PlantManagerProps, any> {
 
     render(){
         // @ts-ignore
-        return (<div>{plants.map(plant =>
-                    <div>
-                    <button onClick={()=>this.addPlant(plant)}>
-                        {plant.label} +
+        return (<div className="AddPlantButtons">{plants.map(plant =>
+                    <button className="AddPlantButton" onClick={()=>this.addPlant(plant)}>
+                        {plant.label}
                     </button>
-                    </div>
                         )}
             </div>
 

@@ -1,8 +1,74 @@
+.Header{
+  width: 100%;
+  background-color: black;
+  color: white;
+  height: 50px;
+  border: thin solid white;
+  font-family: monospace, monospace;
+}
+
 .App {
-  padding: 100px;
   text-align: center;
   display: flex;
   background-color: black;
   color: white;
+  font-family: monospace, monospace;
 }
 
+.LeftSide{
+  border: thin solid white;
+  width: 400px;
+}
+
+.RightSide{
+  border: thin solid white;
+  width: 400px;
+}
+
+.SectionHeading{
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border: thin solid white;
+}
+
+.AddPlantButtons{
+  display: flex;
+  flex-wrap: wrap;
+  padding: 12px;
+}
+
+.AddPlantButton{
+  background-color: black;
+  border: thin solid white;
+  color: white;
+  margin: 4px;
+  padding: 3px;
+
+}
+
+.AddPlantButton:hover{
+  background-color: white;
+  color: black;
+}
+
+
+.WeatherButton{
+  height: 121px;
+  width: 121px;
+  background-color: black;
+  border: thin solid white;
+}
+
+.WeatherButton:hover{
+  background-color: white;
+}
+
+
+img{
+  width: 80%;
+  height: auto;
+}
+
+img:hover{
+  filter: invert(100%);
+}
