@@ -5,7 +5,7 @@ import {plants} from "./plant-manager/plant-manager";
 const fast = 50000;
 const TWO_PI = Math.PI * 2;
 let zOff =0;
-let I = 0;
+//let I = 0;
 
 class Sketch extends React.Component {
     constructor(props) {
@@ -31,7 +31,6 @@ class Sketch extends React.Component {
             p.strokeWeight(1);
             p.fill(0,0,0,10);
             p.frameRate(30);
-            p.background(256);
             p.rectMode(p.CENTER);
             p.ellipseMode(p.CENTER);
 
@@ -45,7 +44,8 @@ class Sketch extends React.Component {
         p.draw = () => {
             p.background(0);
             p.translate(350,350);
-            I = 0;
+            p.rotate(0.2*zOff);
+            // I = 0;
             // const time = 1;
             // this.setState({counter: this.state.counter + time});
             this.props.gardensPlants.map(plant => drawPlant(plant));
@@ -63,15 +63,13 @@ class Sketch extends React.Component {
 
 
         const drawPlant = (plant) => {
-            let radius = 10;
-            let a = 0.01;
+            let a = 0.04;
             let noise = 4;
-            I = plant.index;
+            let I = plant.index;
+            let rr = I*5 - Math.pow(I,2)/35 - 5;
+            //let rr = I*2 + Math.pow(I,2)/10;
             p.stroke(plant.color);
-            let rr = radius + I*5;
-            drawPerlinNoiseCircle(noise, zOff + (I / 5),radius =  rr, rr/6 + 3 , a);
-            // I ++;
-
+            drawPerlinNoiseCircle(noise + I/20 , zOff + (I / 5), rr, rr/6 + 3 , a);
 
         }
 
