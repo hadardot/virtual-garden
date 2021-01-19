@@ -50,9 +50,11 @@ class Garden extends React.Component<any,GardenState>{
     render() {
         return (
             <div className="App">
-                <Sketch gardensPlants={this.state.gardensPlants}/>
+                <div>
                 <PlantManager addPlant={this.addPlantToGarden}/>
                 <WeatherManager setWeather={this.setWeather}/>
+                </div>
+                <Sketch gardensPlants={this.state.gardensPlants}/>
                 <GardenManager gardensPlants={this.state.gardensPlants} removePlantFromGarden={this.removePlantFromGarden} onMouseOutPlantFromGarden={this.onMouseOutPlantFromGarden} onMouseOverPlantFromGarden={this.onMouseOverPlantFromGarden} />
             </div>
         );

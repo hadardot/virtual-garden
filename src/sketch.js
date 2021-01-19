@@ -26,7 +26,7 @@ class Sketch extends React.Component {
         // Native p5 functions work as they would normally but prefixed with
         // a p5 object "p"
         p.setup = () => {
-            p.createCanvas(400, 400);
+            p.createCanvas(700, 700);
             p.stroke(100);
             p.strokeWeight(1);
             p.fill(0,0,0,10);
@@ -44,13 +44,13 @@ class Sketch extends React.Component {
 
         p.draw = () => {
             p.background(0);
-            p.translate(200,200);
+            p.translate(350,350);
             I = 0;
             // const time = 1;
             // this.setState({counter: this.state.counter + time});
             this.props.gardensPlants.map(plant => drawPlant(plant));
             zOff += 0.03;
-            p.translate(-200,-200);
+            p.translate(-350,-350);
         }
 
         const GetPlantAge = (plantDateAdded) => {
