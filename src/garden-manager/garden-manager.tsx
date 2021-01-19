@@ -9,6 +9,16 @@ interface GardenManagerProps {
 
 }
 
+
+
+const GetPlantAge = (currentPlant: plant) => {
+    // @ts-ignore
+    let meeli =  new Date() - currentPlant.dateAdded;
+    let sec = meeli/1000;
+    let minutes = sec/60;
+    return Math.floor(minutes);
+}
+
 export class GardenManager extends React.Component<GardenManagerProps, any> {
     constructor(props: any) {
         super(props);
@@ -17,14 +27,15 @@ export class GardenManager extends React.Component<GardenManagerProps, any> {
     render(){
 
         return(
-        <div>{this.props.gardensPlants.map(plant =>
+        <div className="GardenManager">{this.props.gardensPlants.map(plant =>
             <div>
-                <div onMouseOver={()=>this.props.onMouseOverPlantFromGarden(plant)} onMouseOut={()=>this.props.onMouseOutPlantFromGarden(plant)}>
-                {plant.label + plant.dateAdded?.toTimeString()}
+                <div className="GardenLog" onMouseOver={()=>this.props.onMouseOverPlantFromGarden(plant)} onMouseOut={()=>this.props.onMouseOutPlantFromGarden(plant)}>
+                    <button className="DeletePlantButton" onClick={()=>this.props.removePlantFromGarden(plant)}>
+                        x
+                    </button>
+                {plant.label + GetPlantAge(plant)}
                 </div>
-                <button onClick={()=>this.props.removePlantFromGarden(plant)}>
-                    x
-                </button>
+
             </div>
         )}
         </div>

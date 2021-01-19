@@ -53,15 +53,6 @@ class Sketch extends React.Component {
             p.translate(-350,-350);
         }
 
-        const GetPlantAge = (plantDateAdded) => {
-            let meeli =  new Date() - plantDateAdded;
-            let sec = meeli/1000;
-            let minutes = sec/60;
-            let size = minutes / 50;
-            return size > 400 ? 400:size;
-        }
-
-
         const drawPlant = (plant) => {
             let a = 0.04;
             let noise = 4;
