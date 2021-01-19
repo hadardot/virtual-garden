@@ -31,7 +31,7 @@ export class PlantManager extends React.Component<PlantManagerProps, any> {
         // @ts-ignore
         const plantToAdd = JSON.parse(JSON.stringify(plant));//deep copy
         plantToAdd.dateAdded = new Date();
-        // plantToAdd.index = findPlantIndex();
+        plantToAdd.index = ++currentIndex;
         this.props.addPlant(plantToAdd);
     }
 
