@@ -45,10 +45,13 @@ class Sketch extends React.Component {
             p.background(0);
             p.translate(350,350);
             p.rotate(0.2*zOff);
+
             // I = 0;
             // const time = 1;
             // this.setState({counter: this.state.counter + time});
             this.props.gardensPlants.map(plant => drawPlant(plant));
+
+
             zOff += 0.03;
             p.translate(-350,-350);
         }
@@ -56,12 +59,14 @@ class Sketch extends React.Component {
         const drawPlant = (plant) => {
             let a = 0.04;
             let noise = 4;
-            let I = plant.index;
-            let rr = I*5 - Math.pow(I,2)/35 - 5;
-            //let rr = I*2 + Math.pow(I,2)/10;
             p.stroke(plant.color);
-            drawPerlinNoiseCircle(noise + I/20 , zOff + (I / 5), rr, rr/6 + 3 , a);
 
+            for ( let i = 0; i < plant.index.length ; i ++)
+            {
+                let I = plant.index[i];
+                let rr = I*5 - Math.pow(I,2)/35 ; // - 5
+                drawPerlinNoiseCircle(noise + I/20 , zOff + (I / 5), rr, rr/6 + 3 , a);
+            }
         }
 
         const drawPerlinNoiseCircle = (noiseMax, zOff, radius, radiusStep, aStep) =>{

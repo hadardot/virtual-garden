@@ -2,25 +2,56 @@ import React from 'react';
 import Sketch from "../sketch"
 import './app.css';
 import {plant, PlantManager} from "../plant-manager/plant-manager";
-import {GardenManager} from "../garden-manager/garden-manager";
+import {GardenManager, GetPlantAge} from "../garden-manager/garden-manager";
 import {weather, WeatherManager} from "../weather-manager/weather-manager";
+
+let currentIndex = 0;
 
 interface GardenState {
     gardensPlants: plant[];
     gardensWeather: weather;
-
 }
+
 class Garden extends React.Component<any,GardenState>{
+
+    //let interval = null;
 
     constructor(props: any) {
         super(props);
         this.state = {
             gardensPlants: [],
             gardensWeather: null,
-        };};
+        };
+    };
+
+
+    componentDidMount() {
+        setInterval(() => this.checkGardenPlantsIndex(5), 1000);
+    }
+
+
+    checkGardenPlantsIndex = (mik : number) =>
+    {
+        this.state.gardensPlants.map(plant => this.checkIndex(plant));
+    }
+
+    checkIndex = (currPlant : plant) =>
+    {
+        let age = GetPlantAge(currPlant);
+
+        //  if age > 11000
+
+
+        // @ts-ignore
+        currPlant.index = [...currPlant.index,++currentIndex]
+    }
+    
+
 
     addPlantToGarden = (newPlant: plant) => {
         // @ts-ignore
+
+        newPlant.index[0] = ++currentIndex;
         this.setState({gardensPlants: [...this.state.gardensPlants, newPlant]})
     }
 

@@ -11,7 +11,7 @@ interface GardenManagerProps {
 
 
 
-const GetPlantAge = (currentPlant: plant) => {
+export const GetPlantAge = (currentPlant: plant) => {
     // @ts-ignore
     let meeli =  new Date() - currentPlant.dateAdded;
     let sec = meeli/1000;
