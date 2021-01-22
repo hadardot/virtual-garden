@@ -45,15 +45,29 @@ class Sketch extends React.Component {
             p.background(0);
             p.translate(350,350);
             p.rotate(0.2*zOff);
-
             // I = 0;
             // const time = 1;
             // this.setState({counter: this.state.counter + time});
-            this.props.gardensPlants.map(plant => drawPlant(plant));
-
-
+            if(this.props.isHover){
+                this.props.gardensPlants.map(plant => drawHoverPlant(plant));
+            } else {
+                this.props.gardensPlants.map(plant => drawPlant(plant));
+            }
             zOff += 0.03;
+            if (this.props.gardensPlants === 'rain'){
+                //draw rain
+            }
+            if (this.props.gardensPlants === 'sun'){
+                // draw sun
+            }
             p.translate(-350,-350);
+        }
+
+
+        const drawHoverPlant = (plant) => {
+            if (plant?.isHover){
+                drawPlant(plant);
+            }
         }
 
         const drawPlant = (plant) => {

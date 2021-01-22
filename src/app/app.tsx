@@ -2,7 +2,7 @@ import React from 'react';
 import Sketch from "../sketch"
 import './app.css';
 import {plant, PlantManager} from "../plant-manager/plant-manager";
-import {GardenManager, GetPlantAge} from "../garden-manager/garden-manager";
+import {GardenManager} from "../garden-manager/garden-manager";
 import {weather, WeatherManager} from "../weather-manager/weather-manager";
 
 let currentIndex = 0;
@@ -10,43 +10,18 @@ let currentIndex = 0;
 interface GardenState {
     gardensPlants: plant[];
     gardensWeather: weather;
+    isHover: boolean;
+
 }
-
 class Garden extends React.Component<any,GardenState>{
-
-    //let interval = null;
 
     constructor(props: any) {
         super(props);
         this.state = {
             gardensPlants: [],
             gardensWeather: null,
-        };
-    };
-
-
-    componentDidMount() {
-        setInterval(() => this.checkGardenPlantsIndex(5), 1000);
-    }
-
-
-    checkGardenPlantsIndex = (mik : number) =>
-    {
-        this.state.gardensPlants.map(plant => this.checkIndex(plant));
-    }
-
-    checkIndex = (currPlant : plant) =>
-    {
-        let age = GetPlantAge(currPlant);
-
-        //  if age > 11000
-
-
-        // @ts-ignore
-        currPlant.index = [...currPlant.index,++currentIndex]
-    }
-    
-
+            isHover:false,
+        };};
 
     addPlantToGarden = (newPlant: plant) => {
         // @ts-ignore
@@ -64,13 +39,13 @@ class Garden extends React.Component<any,GardenState>{
     onMouseOverPlantFromGarden = (currentPlant: plant) => {
         // @ts-ignore
         const gardensPlants = this.state.gardensPlants.map(plant => plant.dateAdded === currentPlant.dateAdded ? {...plant, isHover: true}: plant);
-        this.setState({gardensPlants})
+        this.setState({gardensPlants, isHover: true})
     }
 
     onMouseOutPlantFromGarden = (currentPlant: plant) => {
         // @ts-ignore
         const gardensPlants = this.state.gardensPlants.map(plant => plant.dateAdded === currentPlant.dateAdded ? {...plant, isHover: false}: plant);
-        this.setState({gardensPlants})
+        this.setState({gardensPlants, isHover:false})
     }
 
     setWeather = (currentWeather: weather) => {
@@ -89,7 +64,7 @@ class Garden extends React.Component<any,GardenState>{
                 <PlantManager addPlant={this.addPlantToGarden}/>
                 <WeatherManager setWeather={this.setWeather}/>
                 </div>
-                <Sketch gardensPlants={this.state.gardensPlants}/>
+                <Sketch gardensPlants={this.state.gardensPlants} isHover={this.state.isHover} gardensWeather={this.state.gardensWeather}/>
                 <div className="RightSide">
                     <div className="SectionHeading">GARDEN MANAGER</div>
                 <GardenManager gardensPlants={this.state.gardensPlants} removePlantFromGarden={this.removePlantFromGarden} onMouseOutPlantFromGarden={this.onMouseOutPlantFromGarden} onMouseOverPlantFromGarden={this.onMouseOverPlantFromGarden} />
