@@ -27,18 +27,20 @@ export class GardenManager extends React.Component<GardenManagerProps, any> {
     render(){
 
         return(
+            <ul>
         <div className="GardenManager">{this.props.gardensPlants.map(plant =>
             <div>
                 <div className="GardenLog" onMouseOver={()=>this.props.onMouseOverPlantFromGarden(plant)} onMouseOut={()=>this.props.onMouseOutPlantFromGarden(plant)}>
+                    <div className="Info"><li>{plant.label}</li> <div>{GetPlantAge(plant)}</div></div>
                     <button className="DeletePlantButton" onClick={()=>this.props.removePlantFromGarden(plant)}>
                         x
                     </button>
-                {plant.label + GetPlantAge(plant)}
                 </div>
 
             </div>
         )}
         </div>
+            </ul>
         )
     }
 }

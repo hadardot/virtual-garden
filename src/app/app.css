@@ -42,8 +42,8 @@
   background-color: black;
   border: thin solid white;
   color: white;
-  margin: 4px;
-  padding: 3px;
+  margin: 6px;
+  padding: 5px;
 
 }
 
@@ -54,8 +54,8 @@
 
 
 .WeatherButton{
-  height: 121px;
-  width: 121px;
+  width: 33.33333333333333%;
+  height: auto;
   background-color: black;
   border: thin solid white;
 }
@@ -93,4 +93,41 @@ img:hover{
   text-justify: inter-word;
   display: flex;
   justify-content: space-between;
+}
+.HealthBars{
+  padding-top: 15px;
+  height: 100px;
+  justify-content: left;
+
+}
+
+progress[value] {
+  /* Reset the default appearance */
+  -webkit-appearance: none;
+  appearance: none;
+  padding-right: 20px;
+  width: 200px;
+  height: 10px;
+}
+
+
+
+progress[value]::-webkit-progress-bar {
+  background-color: black;
+  border: thin solid white;
+}
+
+progress[value]::-webkit-progress-value {
+  background-color: white;
+}
+
+.WeatherManager{
+  width: 100%;
+}
+
+.Info{
+  width: 300px;
+  display: flex;
+  justify-content: space-between;
+  padding-right: 10px;
 }

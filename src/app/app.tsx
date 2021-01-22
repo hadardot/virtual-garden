@@ -11,7 +11,7 @@ interface GardenState {
     gardensPlants: plant[];
     gardensWeather: weather;
     isHover: boolean;
-    
+
 
 }
 class Garden extends React.Component<any,GardenState>{
@@ -88,9 +88,16 @@ class Garden extends React.Component<any,GardenState>{
             </div>
             <div className="App">
                 <div className="LeftSide">
+                    <div className="SectionHeading">CONTROL PANEL</div>
+                    <div className="HealthBars">
+
+                        <progress id="file" value="32" max="100"/>22c
+                        <progress id="file" value="32" max="100"/>46%
+                        <progress id="file" value="32" max="100"/>77%
+                    </div>
+                    <WeatherManager setWeather={this.setWeather}/>
                     <div className="SectionHeading">ADD PLANTS</div>
-                <PlantManager addPlant={this.addPlantToGarden}/>
-                <WeatherManager setWeather={this.setWeather}/>
+                    <PlantManager addPlant={this.addPlantToGarden}/>
                 </div>
 
                 <Sketch gardensPlants={this.state.gardensPlants} isHover={this.state.isHover} gardensWeather={this.state.gardensWeather}/>
