@@ -84,7 +84,8 @@ class Garden extends React.Component<any,GardenState>{
     render() {
         return (<>
             <div className="Header">
-                Grow header
+                <img className="Logo" src='https://i.ibb.co/BLgnTW2/grow-logo.png'/>
+                <div className="About">ABOUT</div>
             </div>
             <div className="App">
                 <div className="LeftSide">
@@ -107,6 +108,12 @@ class Garden extends React.Component<any,GardenState>{
                 <GardenManager gardensPlants={this.state.gardensPlants} removePlantFromGarden={this.removePlantFromGarden} onMouseOutPlantFromGarden={this.onMouseOutPlantFromGarden} onMouseOverPlantFromGarden={this.onMouseOverPlantFromGarden} />
                 </div>
             </div>
+                <div className="marquee">
+                    <div>
+                        <span>DONT FORGET TO WATER YOUR PLANTS ////////////////////////// DONT FORGET TO WATER YOUR PLANTS //////////////////////////</span>
+                        <span>DONT FORGET TO WATER YOUR PLANTS ////////////////////////// DONT FORGET TO WATER YOUR PLANTS //////////////////////////</span>
+                    </div>
+                </div>
             </>
         );
     }
