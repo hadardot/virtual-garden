@@ -11,9 +11,7 @@ interface GardenState {
     gardensPlants: plant[];
     gardensWeather: weather;
     isHover: boolean;
-
-}
-
+    
 
 }
 class Garden extends React.Component<any,GardenState>{
