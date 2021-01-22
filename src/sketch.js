@@ -48,11 +48,20 @@ class Sketch extends React.Component {
             // I = 0;
             // const time = 1;
             // this.setState({counter: this.state.counter + time});
+<<<<<<< HEAD
             if(this.props.isHover){
                 this.props.gardensPlants.map(plant => drawHoverPlant(plant));
             } else {
                 this.props.gardensPlants.map(plant => drawPlant(plant));
             }
+=======
+            if (this.props.isHover){
+                this.props.gardensPlants.map(plant => drawHoverPlant(plant));
+            }else{
+                this.props.gardensPlants.map(plant => drawPlant(plant));
+            }
+
+>>>>>>> isHover
             zOff += 0.03;
             if (this.props.gardensPlants === 'rain'){
                 //draw rain
@@ -80,6 +89,12 @@ class Sketch extends React.Component {
                 let I = plant.index[i];
                 let rr = I*5 - Math.pow(I,2)/35 ; // - 5
                 drawPerlinNoiseCircle(noise + I/20 , zOff + (I / 5), rr, rr/6 + 3 , a);
+            }
+        }
+
+        const drawHoverPlant = (plant) => {
+            if(plant?.isHover){
+                drawPlant(plant);
             }
         }
 

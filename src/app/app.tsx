@@ -11,6 +11,10 @@ interface GardenState {
     gardensPlants: plant[];
     gardensWeather: weather;
     isHover: boolean;
+<<<<<<< HEAD
+=======
+}
+>>>>>>> isHover
 
 }
 class Garden extends React.Component<any,GardenState>{
@@ -20,8 +24,38 @@ class Garden extends React.Component<any,GardenState>{
         this.state = {
             gardensPlants: [],
             gardensWeather: null,
+<<<<<<< HEAD
             isHover:false,
         };};
+=======
+            isHover: false,
+        };
+    };
+
+
+    componentDidMount() {
+        setInterval(() => this.checkGardenPlantsIndex(5), 1000);
+    }
+
+
+    checkGardenPlantsIndex = (mik : number) =>
+    {
+        this.state.gardensPlants.map(plant => this.checkIndex(plant));
+    }
+
+    checkIndex = (currPlant : plant) =>
+    {
+        let age = GetPlantAge(currPlant);
+
+        //  if age > 11000
+
+
+        // @ts-ignore
+        currPlant.index = [...currPlant.index,++currentIndex]
+    }
+
+
+>>>>>>> isHover
 
     addPlantToGarden = (newPlant: plant) => {
         // @ts-ignore
@@ -45,7 +79,11 @@ class Garden extends React.Component<any,GardenState>{
     onMouseOutPlantFromGarden = (currentPlant: plant) => {
         // @ts-ignore
         const gardensPlants = this.state.gardensPlants.map(plant => plant.dateAdded === currentPlant.dateAdded ? {...plant, isHover: false}: plant);
+<<<<<<< HEAD
         this.setState({gardensPlants, isHover:false})
+=======
+        this.setState({gardensPlants, isHover: false})
+>>>>>>> isHover
     }
 
     setWeather = (currentWeather: weather) => {
@@ -64,7 +102,11 @@ class Garden extends React.Component<any,GardenState>{
                 <PlantManager addPlant={this.addPlantToGarden}/>
                 <WeatherManager setWeather={this.setWeather}/>
                 </div>
+<<<<<<< HEAD
                 <Sketch gardensPlants={this.state.gardensPlants} isHover={this.state.isHover} gardensWeather={this.state.gardensWeather}/>
+=======
+                <Sketch gardensPlants={this.state.gardensPlants} isHover={this.state.isHover}/>
+>>>>>>> isHover
                 <div className="RightSide">
                     <div className="SectionHeading">GARDEN MANAGER</div>
                 <GardenManager gardensPlants={this.state.gardensPlants} removePlantFromGarden={this.removePlantFromGarden} onMouseOutPlantFromGarden={this.onMouseOutPlantFromGarden} onMouseOverPlantFromGarden={this.onMouseOverPlantFromGarden} />
