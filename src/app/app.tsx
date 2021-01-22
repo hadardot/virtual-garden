@@ -15,7 +15,7 @@ interface GardenState {
 }
 
 
-}
+
 class Garden extends React.Component<any,GardenState>{
 
     constructor(props: any) {
