@@ -1,18 +1,39 @@
+@font-face {
+  font-family: IBMPlexMono;
+  src: url('./fonts/IBMPlexMono-Regular.ttf');
+}
+
+
 .Header{
   width: 100%;
   background-color: black;
   color: white;
-  height: 50px;
+  height: 80px;
   border: thin solid white;
-  font-family: monospace, monospace;
+  font-family: IBMPlexMono;
+  display: flex;
+  justify-content: space-between;
 }
 
+.Logo{
+  padding: 25px;
+  width: 8%;
+  height: auto;
+}
+.Logo:hover{
+  filter: none;
+}
+
+
+.About{
+  padding: 30px;
+}
 .App {
   text-align: center;
   display: flex;
   background-color: black;
   color: white;
-  font-family: monospace, monospace;
+  font-family: IBMPlexMono;
 }
 
 .LeftSide{
@@ -38,12 +59,12 @@
 }
 
 .AddPlantButton{
-  font-family: monospace, monospace;
+  font-family: IBMPlexMono;
   background-color: black;
   border: thin solid white;
   color: white;
-  margin: 4px;
-  padding: 3px;
+  margin: 6px;
+  padding: 5px;
 
 }
 
@@ -54,8 +75,8 @@
 
 
 .WeatherButton{
-  height: 121px;
-  width: 121px;
+  width: 33.33333333333333%;
+  height: auto;
   background-color: black;
   border: thin solid white;
 }
@@ -94,3 +115,189 @@ img:hover{
   display: flex;
   justify-content: space-between;
 }
+.HealthBars{
+  padding-top: 15px;
+  height: 100px;
+  justify-content: left;
+
+}
+
+progress[value] {
+  /* Reset the default appearance */
+  -webkit-appearance: none;
+  appearance: none;
+  padding-right: 20px;
+  width: 200px;
+  height: 10px;
+}
+
+
+
+progress[value]::-webkit-progress-bar {
+  background-color: black;
+  border: thin solid white;
+}
+
+progress[value]::-webkit-progress-value {
+  background-color: white;
+}
+
+.WeatherManager{
+  width: 100%;
+}
+
+.Info{
+  width: 300px;
+  display: flex;
+  justify-content: space-between;
+  padding-right: 10px;
+}
+
+
+
+
+.marquee {
+  padding: 15px;
+  border: thin solid white;
+  background-color: black;
+  color: white;
+  font-family: IBMPlexMono;
+  font-size: large;
+  height: 70px;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.marquee div {
+  background-color: black;
+  color: white;
+  font-family: IBMPlexMono;
+  display: block;
+  width: 200%;
+  height: 30px;
+  position: absolute;
+  overflow: hidden;
+  animation: marquee 20s linear infinite;
+}
+
+.marquee span {
+  background-color: black;
+  color: white;
+  font-family: IBMPlexMono;
+  float: left;
+  width: 50%;
+}
+
+@keyframes marquee {
+  0% { left: 0; }
+  100% { left: -100%; }
+}
+
+
+
+
+/*bullet colors definition*/
+
+ul {
+  list-style: none;
+  padding: 15px;
+}
+
+.pothos::before{
+  content: "\2022";
+  color: #ff7dab!important;
+  padding-right: 5px;
+}
+
+
+.spider::before{
+  content: "\2022";
+  color: #f64483!important;
+  padding-right: 5px;
+}
+
+.monstra::before{
+  content: "\2022";
+  color: #ff71a4!important;
+  padding-right: 5px;
+}
+
+.lavender::before{
+  content: "\2022";
+  color: #ff84e0!important;
+  padding-right: 5px;
+}
+
+.batsheva::before{
+  content: "\2022";
+  color: #b75bc6!important;
+  padding-right: 5px;
+}
+
+.paperumia::before{
+  content: "\2022";
+  color: #6898d9!important;
+  padding-right: 5px;
+}
+
+.ficus::before{
+  content: "\2022";
+  color: #00b094!important;
+  padding-right: 5px;
+}
+
+.alovera::before{
+  content: "\2022";
+  color: #246d77!important;
+  padding-right: 5px;
+}
+
+.calathea::before{
+  content: "\2022";
+  color: #ea6cff!important;
+  padding-right: 5px;
+}
+
+.aglaonema::before{
+  content: "\2022";
+  color: #54ffc0!important;
+  padding-right: 5px;
+}
+
+.asparagus-fern::before{
+  content: "\2022";
+  color: #82b7ff!important;
+  padding-right: 5px;
+}
+
+.yucca::before{
+  content: "\2022";
+  color: #14e1ff!important;
+  padding-right: 5px;
+}
+
+
+.air-plant::before{
+  content: "\2022";
+  color: #6878d9!important;
+  padding-right: 5px;
+}
+
+.english-ivy::before{
+  content: "\2022";
+  color: #c65bb7!important;
+  padding-right: 5px;
+}
+
+.dragon-tree::before{
+  content: "\2022";
+  color: #245577!important;
+  padding-right: 5px;
+}
+.bromeliad::before{
+  content: "\2022";
+  color: #009ab0!important;
+  padding-right: 5px;
+}
+

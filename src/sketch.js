@@ -45,16 +45,26 @@ class Sketch extends React.Component {
             p.background(0);
             p.translate(350,350);
             p.rotate(0.2*zOff);
-
             // I = 0;
             // const time = 1;
             // this.setState({counter: this.state.counter + time});
-            this.props.gardensPlants.map(plant => drawPlant(plant));
 
+            if(this.props.isHover){
+                this.props.gardensPlants.map(plant => drawHoverPlant(plant));
+            } else {
+                this.props.gardensPlants.map(plant => drawPlant(plant));
+            }
 
             zOff += 0.03;
+            if (this.props.gardensPlants === 'rain'){
+                //draw rain
+            }
+            if (this.props.gardensPlants === 'sun'){
+                // draw sun
+            }
             p.translate(-350,-350);
         }
+
 
         const drawPlant = (plant) => {
             let a = 0.04;  // let a = 0.04;
@@ -69,6 +79,12 @@ class Sketch extends React.Component {
                     let rr = -Math.pow(I + 10, 2) / 40 + (I + 10) * 6 - 57; //Math.log10(I+4)*180-110;  // Math.log10(I+2)*100-35;   // I*5- Math.pow(I,2)/35 ; // - 5
                     drawPerlinNoiseCircle(noise + I / 15, zOff + (I / 5), rr, rr / 6 + 3, a);
                 }
+            }
+        }
+
+        const drawHoverPlant = (plant) => {
+            if(plant?.isHover){
+                drawPlant(plant);
             }
         }
 

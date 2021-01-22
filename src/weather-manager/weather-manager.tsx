@@ -14,7 +14,7 @@ export class WeatherManager extends React.Component<WeatherManagerProps, any> {
     render(){
 
         return(
-            <div>
+            <div className="WeatherManager">
 
                 <button className="WeatherButton" onClick={()=>this.props.setWeather('rain')}><img src="https://i.ibb.co/h9qd7dP/rain.png"/></button>
                 <button className="WeatherButton" onClick={()=>this.props.setWeather('sun')}><img src="https://i.ibb.co/kMNTVt5/sun.png"/></button>

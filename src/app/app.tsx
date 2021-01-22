@@ -10,19 +10,21 @@ let currentIndex = 0;
 interface GardenState {
     gardensPlants: plant[];
     gardensWeather: weather;
+    isHover: boolean;
+
+
 }
-
 class Garden extends React.Component<any,GardenState>{
-
-    //let interval = null;
 
     constructor(props: any) {
         super(props);
         this.state = {
             gardensPlants: [],
             gardensWeather: null,
-        };
-    };
+
+            isHover:false,
+        };};
+
 
 
     componentDidMount() {
@@ -45,7 +47,8 @@ class Garden extends React.Component<any,GardenState>{
         // @ts-ignore
         currPlant.index = [...currPlant.index,++currentIndex]
     }
-    
+
+
 
 
     addPlantToGarden = (newPlant: plant) => {
@@ -64,13 +67,13 @@ class Garden extends React.Component<any,GardenState>{
     onMouseOverPlantFromGarden = (currentPlant: plant) => {
         // @ts-ignore
         const gardensPlants = this.state.gardensPlants.map(plant => plant.dateAdded === currentPlant.dateAdded ? {...plant, isHover: true}: plant);
-        this.setState({gardensPlants})
+        this.setState({gardensPlants, isHover: true})
     }
 
     onMouseOutPlantFromGarden = (currentPlant: plant) => {
         // @ts-ignore
         const gardensPlants = this.state.gardensPlants.map(plant => plant.dateAdded === currentPlant.dateAdded ? {...plant, isHover: false}: plant);
-        this.setState({gardensPlants})
+        this.setState({gardensPlants, isHover: false})
     }
 
     setWeather = (currentWeather: weather) => {
@@ -81,20 +84,36 @@ class Garden extends React.Component<any,GardenState>{
     render() {
         return (<>
             <div className="Header">
-                Grow header
+                <img className="Logo" src='https://i.ibb.co/BLgnTW2/grow-logo.png'/>
+                <div className="About">ABOUT</div>
             </div>
             <div className="App">
                 <div className="LeftSide">
+                    <div className="SectionHeading">CONTROL PANEL</div>
+                    <div className="HealthBars">
+
+                        <progress id="file" value="32" max="100"/>22c
+                        <progress id="file" value="32" max="100"/>46%
+                        <progress id="file" value="32" max="100"/>77%
+                    </div>
+                    <WeatherManager setWeather={this.setWeather}/>
                     <div className="SectionHeading">ADD PLANTS</div>
-                <PlantManager addPlant={this.addPlantToGarden}/>
-                <WeatherManager setWeather={this.setWeather}/>
+                    <PlantManager addPlant={this.addPlantToGarden}/>
                 </div>
-                <Sketch gardensPlants={this.state.gardensPlants}/>
+
+                <Sketch gardensPlants={this.state.gardensPlants} isHover={this.state.isHover} gardensWeather={this.state.gardensWeather}/>
+
                 <div className="RightSide">
                     <div className="SectionHeading">GARDEN MANAGER</div>
                 <GardenManager gardensPlants={this.state.gardensPlants} removePlantFromGarden={this.removePlantFromGarden} onMouseOutPlantFromGarden={this.onMouseOutPlantFromGarden} onMouseOverPlantFromGarden={this.onMouseOverPlantFromGarden} />
                 </div>
             </div>
+                <div className="marquee">
+                    <div>
+                        <span>DONT FORGET TO WATER YOUR PLANTS ////////////////////////// DONT FORGET TO WATER YOUR PLANTS //////////////////////////</span>
+                        <span>DONT FORGET TO WATER YOUR PLANTS ////////////////////////// DONT FORGET TO WATER YOUR PLANTS //////////////////////////</span>
+                    </div>
+                </div>
             </>
         );
     }
