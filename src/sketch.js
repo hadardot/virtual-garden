@@ -57,15 +57,18 @@ class Sketch extends React.Component {
         }
 
         const drawPlant = (plant) => {
-            let a = 0.04;
+            let a = 0.04;  // let a = 0.04;
             let noise = 4;
             p.stroke(plant.color);
 
             for ( let i = 0; i < plant.index.length ; i ++)
             {
                 let I = plant.index[i];
-                let rr = I*5 - Math.pow(I,2)/35 ; // - 5
-                drawPerlinNoiseCircle(noise + I/20 , zOff + (I / 5), rr, rr/6 + 3 , a);
+                if (I < 100)   // can be in app as well max current index is 110
+                {
+                    let rr = -Math.pow(I + 10, 2) / 40 + (I + 10) * 6 - 57; //Math.log10(I+4)*180-110;  // Math.log10(I+2)*100-35;   // I*5- Math.pow(I,2)/35 ; // - 5
+                    drawPerlinNoiseCircle(noise + I / 15, zOff + (I / 5), rr, rr / 6 + 3, a);
+                }
             }
         }
 
