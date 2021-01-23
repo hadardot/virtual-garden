@@ -17,8 +17,6 @@ let rotation = 0;
 let rainForce = 0;
 
 
-
-
 export const doRain = () =>
 {
     rainTimer = 0;
@@ -61,21 +59,19 @@ class Sketch extends React.Component {
             p.ellipseMode(p.CENTER);
         }
 
-
-        
         p.draw = () => {
             // this.setState({counter: this.state.counter + time});
             p.background(0);
             p.translate(SCREEN_SIZE/2,SCREEN_SIZE/2);
             counter += 0.03;
             rotation += 0.01;
-            p.rotate(rotation);   // regular rotation
-            if (isRainTime)   // rain rotation
+            p.rotate(rotation);
+            if (isRainTime)
             {
                 rainTimer += 1/fps;
                 rainForce = rainForceOverTime(rainTimer);
-                p.rotate(rainForce);
-                if (rainTimer >= 2)  // 2 sec for rain
+                p.rotate(rainForce);     // rain rotation
+                if (rainTimer >= RAIN_TIME)
                 {
                     rainTimer = 0;
                     isRainTime = false;
@@ -83,11 +79,11 @@ class Sketch extends React.Component {
                 }
             }
 
-            if (this.props.isHover)   // hover
+            if (this.props.isHover)
             {
                 this.props.gardensPlants.map(plant => drawHoverPlant(plant));
             }
-            else if (isSunTime)    // or sun
+            else if (isSunTime)
             {
                 sunTimer += 1/fps;
                 this.props.gardensPlants.map(plant => drawPlant(plant,sunTimer));
@@ -97,7 +93,7 @@ class Sketch extends React.Component {
                     isSunTime = false;
                 }
             }
-            else    // or regular
+            else
             {
                 this.props.gardensPlants.map(plant => drawPlant(plant));
             }
