@@ -4,7 +4,7 @@ import './app.css';
 import {plant, PlantManager} from "../plant-manager/plant-manager";
 import {GardenManager, GetPlantAge} from "../garden-manager/garden-manager";
 import {weather, WeatherManager} from "../weather-manager/weather-manager";
-
+const arrows = '>>>>>';
 let currentIndex = 0;
 
 interface GardenState {
@@ -82,7 +82,7 @@ class Garden extends React.Component<any,GardenState>{
     }
 
     render() {
-        return (<>
+        return (<div className="Homepage">
             <div className="Header">
                 <img className="Logo" src='https://i.ibb.co/BLgnTW2/grow-logo.png'/>
                 <div className="About">ABOUT</div>
@@ -100,9 +100,9 @@ class Garden extends React.Component<any,GardenState>{
                     <div className="SectionHeading">ADD PLANTS</div>
                     <PlantManager addPlant={this.addPlantToGarden}/>
                 </div>
-
+                <div className="Sketch">
                 <Sketch gardensPlants={this.state.gardensPlants} isHover={this.state.isHover} gardensWeather={this.state.gardensWeather}/>
-
+                </div>
                 <div className="RightSide">
                     <div className="SectionHeading">GARDEN MANAGER</div>
                 <GardenManager gardensPlants={this.state.gardensPlants} removePlantFromGarden={this.removePlantFromGarden} onMouseOutPlantFromGarden={this.onMouseOutPlantFromGarden} onMouseOverPlantFromGarden={this.onMouseOverPlantFromGarden} />
@@ -110,11 +110,11 @@ class Garden extends React.Component<any,GardenState>{
             </div>
                 <div className="marquee">
                     <div>
-                        <span>DONT FORGET TO WATER YOUR PLANTS ////////////////////////// DONT FORGET TO WATER YOUR PLANTS //////////////////////////</span>
-                        <span>DONT FORGET TO WATER YOUR PLANTS ////////////////////////// DONT FORGET TO WATER YOUR PLANTS //////////////////////////</span>
+                        <span>DONT FORGET TO WATER YOUR PLANTS    {arrows}    DONT FORGET TO WATER YOUR PLANTS   {arrows}    DONT FORGET TO WATER YOUR PLANTS    {arrows}    DONT FORGET TO WATER YOUR PLANTS    {arrows}    DONT FORGET TO WATER YOUR PLANTS    {arrows}</span>
+                        <span>DONT FORGET TO WATER YOUR PLANTS    {arrows}    DONT FORGET TO WATER YOUR PLANTS   {arrows}    DONT FORGET TO WATER YOUR PLANTS    {arrows}    DONT FORGET TO WATER YOUR PLANTS    {arrows}    DONT FORGET TO WATER YOUR PLANTS    {arrows}</span>
                     </div>
                 </div>
-            </>
+            </div>
         );
     }
 }
