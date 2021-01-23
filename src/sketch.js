@@ -6,6 +6,8 @@ const TWO_PI = Math.PI * 2;
 let counter = 0;
 
 const fps = 30;
+const RAIN_TIME = 2;
+const SUN_TIME = 1;
 const SCREEN_SIZE = 700;
 var isRainTime = false;
 var isSunTime = false;
@@ -67,12 +69,11 @@ class Sketch extends React.Component {
             p.translate(SCREEN_SIZE/2,SCREEN_SIZE/2);
             counter += 0.03;
             rotation += 0.01;
-
-            p.rotate(rotation);
-            if (isRainTime)
+            p.rotate(rotation);   // regular rotation
+            if (isRainTime)   // rain rotation
             {
                 rainTimer += 1/fps;
-                rainForce = forceOverTime(rainTimer);
+                rainForce = rainForceOverTime(rainTimer);
                 p.rotate(rainForce);
                 if (rainTimer >= 2)  // 2 sec for rain
                 {
@@ -82,21 +83,21 @@ class Sketch extends React.Component {
                 }
             }
 
-            if (this.props.isHover)
+            if (this.props.isHover)   // hover
             {
                 this.props.gardensPlants.map(plant => drawHoverPlant(plant));
             }
-            else if (isSunTime)
+            else if (isSunTime)    // or sun
             {
                 sunTimer += 1/fps;
-                if (sunTimer >= 2)  // 2 sec for sun
+                this.props.gardensPlants.map(plant => drawPlant(plant,sunTimer));
+                if (sunTimer >= SUN_TIME)
                 {
                     sunTimer = 0;
                     isSunTime = false;
                 }
-                this.props.gardensPlants.map(plant => drawPlant(plant,sunTimer));
             }
-            else
+            else    // or regular
             {
                 this.props.gardensPlants.map(plant => drawPlant(plant));
             }
@@ -117,13 +118,8 @@ class Sketch extends React.Component {
             p.stroke(plant.color);
             if (sunTimer)
             {
-                //a = hexToRgb(plant.color);
-                console.log(a);
-                //p.stroke(plant.color);
-                //console.log(sunTimer);  /// 0 - 2
-                //console.log(plant.color.rgb);
+                setStrokeColorSun(plant.color,sunTimer);
             }
-
             for ( let i = 0; i < plant.index.length ; i ++)
             {
                 let I = plant.index[i];
@@ -134,7 +130,7 @@ class Sketch extends React.Component {
                 }
             }
         }
-        
+
         const drawPerlinNoiseCircle = (noiseMax, zOff, radius, radiusStep, aStep) =>{
 
             p.noFill();
@@ -150,8 +146,26 @@ class Sketch extends React.Component {
             p.endShape(p.CLOSE);
         }
 
-        const forceOverTime = (x) => {
-            return (erf(2*x-2)+1)*2;
+        const setStrokeColorSun = (originalColor,sunTimer) =>
+        {
+            let rgb = p.color(originalColor);
+            let r = rgb.levels[0];
+            let g = rgb.levels[1];
+            let b = rgb.levels[2];
+            let x  = sunForceOverTime(sunTimer);
+            r += (255-r)*(x/SUN_TIME);
+            g += (255-g)*(x/SUN_TIME);
+            b += (255-b)*(x/SUN_TIME);
+            p.stroke(p.color(r,g,b));
+        }
+
+        const rainForceOverTime = (x) => {
+            return 2*(erf(2*x-2)+1);
+        }
+
+        const sunForceOverTime = (x) =>
+        {
+            return Math.pow(2,-Math.pow((x-1/2)*5,2))/1.5;
         }
 
         const erf = (x) => {
