@@ -2,10 +2,31 @@ import React from 'react'
 import p5 from 'p5'
 import {plants} from "./plant-manager/plant-manager";
 
-const fast = 50000;
 const TWO_PI = Math.PI * 2;
-let zOff =0;
-//let I = 0;
+let zOff = 0;
+
+const MAX_RAIN = 2000;
+const MAX_SUN = 2000;
+var isRainTime = false;
+var isSunTime = false;
+let rainTimer = 0;
+let sunTimer = 0;
+
+
+export const doRain = () =>
+{
+    console.log("hadar is beautiful");
+    isRainTime = true;
+}
+
+export const doSun = () =>
+{
+    isSunTime = true;
+}
+
+export const doPicture = () =>
+{}
+
 
 class Sketch extends React.Component {
     constructor(props) {
@@ -44,39 +65,72 @@ class Sketch extends React.Component {
         p.draw = () => {
             p.background(0);
             p.translate(350,350);
+
             p.rotate(0.2*zOff);
+
             // I = 0;
             // const time = 1;
             // this.setState({counter: this.state.counter + time});
 
-            if(this.props.isHover){
+
+            if (isRainTime)
+            {
+                // rain
+                // timerRain ++
+                // if timer > max
+                // timer = 0;
+                // israintime = false;
+            }
+
+            if (this.props.gardensWeather === 'rain')
+            {
+
+                //if (!isRainTime)
+                //{
+                 //   rainTimer = 0;
+                //}
+                //if (rainTimer < MAX_RAIN)
+                //{
+                //    isRainTime = true;
+                //}
+                //rainTimer += 1;
+            }
+
+
+            if (this.props.gardensWeather === 'sun'){
+                //start sun draw sun
+            }
+
+
+            if (this.props.isHover)
+            {
                 this.props.gardensPlants.map(plant => drawHoverPlant(plant));
-            } else {
+            }
+            else
+            {
                 this.props.gardensPlants.map(plant => drawPlant(plant));
             }
 
+
+
+
             zOff += 0.03;
-            if (this.props.gardensPlants === 'rain'){
-                //draw rain
-            }
-            if (this.props.gardensPlants === 'sun'){
-                // draw sun
-            }
             p.translate(-350,-350);
         }
+
+
 
 
         const drawPlant = (plant) => {
             let a = 0.04;  // let a = 0.04;
             let noise = 4;
             p.stroke(plant.color);
-
             for ( let i = 0; i < plant.index.length ; i ++)
             {
                 let I = plant.index[i];
                 if (I < 100)   // can be in app as well max current index is 110
                 {
-                    let rr = -Math.pow(I + 10, 2) / 40 + (I + 10) * 6 - 57; //Math.log10(I+4)*180-110;  // Math.log10(I+2)*100-35;   // I*5- Math.pow(I,2)/35 ; // - 5
+                    let rr = -Math.pow(I + 10, 2) / 40 + (I + 10) * 6 - 57;
                     drawPerlinNoiseCircle(noise + I / 15, zOff + (I / 5), rr, rr / 6 + 3, a);
                 }
             }
