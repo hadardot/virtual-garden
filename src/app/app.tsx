@@ -14,6 +14,25 @@ interface GardenState {
 
 
 }
+
+function Healthbars() {
+    return <div className="HealthBars">
+        <progress id="file" value="22 " max="100"/>
+        22 °c
+        <progress id="file" value="46" max="100"/>46% Humidity
+        <progress id="file" value="3.17" max="100"/>3 days 17 hours
+    </div>;
+}
+
+function Marquee() {
+    return <div className="marquee">
+        <div>
+            <span>DONT FORGET TO WATER YOUR PLANTS {arrows} DONT FORGET TO WATER YOUR PLANTS {arrows} DONT FORGET TO WATER YOUR PLANTS {arrows}    </span>
+            <span>DONT FORGET TO WATER YOUR PLANTS {arrows} DONT FORGET TO WATER YOUR PLANTS {arrows} DONT FORGET TO WATER YOUR PLANTS {arrows}    </span>
+        </div>
+    </div>;
+}
+
 class Garden extends React.Component<any,GardenState>{
 
     constructor(props: any) {
@@ -83,37 +102,39 @@ class Garden extends React.Component<any,GardenState>{
 
     render() {
         return (<div className="Homepage">
-            <div className="Header">
-                <img className="Logo" src='https://i.ibb.co/BLgnTW2/grow-logo.png'/>
-                <div className="About">ABOUT</div>
-            </div>
-            <div className="App">
-                <div className="LeftSide">
-                    <div className="SectionHeading">CONTROL PANEL</div>
-                    <div className="HealthBars">
+                <div className="Header">
+                    <img className="Logo" src='https://i.ibb.co/BLgnTW2/grow-logo.png'/>
+                    <div className="About">ABOUT</div>
+                </div>
+                <div className="App">
+                    <div className="LeftSide">
+                        <div className="SectionHeading">CONTROL PANEL</div>
+                        {Healthbars()}
+                        <WeatherManager setWeather={this.setWeather}/>
+                        <div className="SectionHeading">ADD PLANTS</div>
+                        <PlantManager addPlant={this.addPlantToGarden}/>
+                    </div>
+                    <div className="Sketch">
+                        <Sketch gardensPlants={this.state.gardensPlants} isHover={this.state.isHover}
+                                gardensWeather={this.state.gardensWeather}/>
+                    </div>
+                    <div className="RightSide">
+                        <div className="SectionHeading">GARDEN MANAGER</div>
+                        <GardenManager gardensPlants={this.state.gardensPlants}
+                                       removePlantFromGarden={this.removePlantFromGarden}
+                                       onMouseOutPlantFromGarden={this.onMouseOutPlantFromGarden}
+                                       onMouseOverPlantFromGarden={this.onMouseOverPlantFromGarden}/>
+                                       <div className="Overview">
+                                           <img className="Cloudy" src="https://i.ibb.co/nsLsptq/cloudy-icon.png"/>
+                                           <div>
+                                               <div className="Date"></div>
+                                               <div className="Weather">Cloudy</div>
+                                           </div>
 
-                        <progress id="file" value="32" max="100"/>22c
-                        <progress id="file" value="32" max="100"/>46%
-                        <progress id="file" value="32" max="100"/>77%
-                    </div>
-                    <WeatherManager setWeather={this.setWeather}/>
-                    <div className="SectionHeading">ADD PLANTS</div>
-                    <PlantManager addPlant={this.addPlantToGarden}/>
-                </div>
-                <div className="Sketch">
-                <Sketch gardensPlants={this.state.gardensPlants} isHover={this.state.isHover} gardensWeather={this.state.gardensWeather}/>
-                </div>
-                <div className="RightSide">
-                    <div className="SectionHeading">GARDEN MANAGER</div>
-                <GardenManager gardensPlants={this.state.gardensPlants} removePlantFromGarden={this.removePlantFromGarden} onMouseOutPlantFromGarden={this.onMouseOutPlantFromGarden} onMouseOverPlantFromGarden={this.onMouseOverPlantFromGarden} />
-                </div>
-            </div>
-                <div className="marquee">
-                    <div>
-                        <span>DONT FORGET TO WATER YOUR PLANTS    {arrows}    DONT FORGET TO WATER YOUR PLANTS   {arrows}    DONT FORGET TO WATER YOUR PLANTS    {arrows}    DONT FORGET TO WATER YOUR PLANTS    {arrows}    DONT FORGET TO WATER YOUR PLANTS    {arrows}</span>
-                        <span>DONT FORGET TO WATER YOUR PLANTS    {arrows}    DONT FORGET TO WATER YOUR PLANTS   {arrows}    DONT FORGET TO WATER YOUR PLANTS    {arrows}    DONT FORGET TO WATER YOUR PLANTS    {arrows}    DONT FORGET TO WATER YOUR PLANTS    {arrows}</span>
+                                       </div>
                     </div>
                 </div>
+                {Marquee()}
             </div>
         );
     }
