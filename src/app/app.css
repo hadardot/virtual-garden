@@ -1,4 +1,6 @@
-
+body{
+  background-color: black;
+}
 @font-face {
   font-family: IBMPlexMono;
   src: url('./fonts/IBMPlexMono-Regular.ttf');
@@ -40,13 +42,10 @@ button:focus {outline:0;}
   background-color: black;
 }
 
-
-
 .About{
   padding: 30px;
 }
 .App {
-  text-align: center;
   display: flex;
   justify-content: space-between;
   background-color: black;
@@ -58,19 +57,24 @@ button:focus {outline:0;}
 
 }
 .LeftSide{
-  border: thin solid white;
+  border: solid white;
+  border-width: 0px thin 0px thin;
   width: 400px;
 }
 
 .RightSide{
-  border: thin solid white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: solid white;
+  border-width: 0px thin 0px thin;
   width: 400px;
 }
 
 .SectionHeading{
-  padding-top: 5px;
-  padding-bottom: 5px;
-  border: thin solid white;
+  padding: 15px;
+  border: solid white;
+  border-width: 0px 0px thin 0px;
 }
 
 .AddPlantButtons{
@@ -95,11 +99,33 @@ button:focus {outline:0;}
 }
 
 
+.Overview{
+  display: flex;
+  padding: 15px;
+  height: 120px;
+  border: solid white;
+  border-width: thin 0px 0px 0px;
+}
+
+.Cloudy{
+  height: 100px;
+  width: auto;
+}
+
+.Weather{
+  font-size: medium;
+}
+
+.WeatherManager{
+  width: 100%;
+}
 .WeatherButton{
+  padding: 15px;
   width: 33.33333333333333%;
   height: auto;
   background-color: black;
-  border: thin solid white;
+  border: solid white;
+  border-width: thin 0px thin thin;
 }
 
 .WeatherButton:hover{
@@ -138,19 +164,19 @@ img:hover{
   justify-content: space-between;
 }
 .HealthBars{
-  padding-top: 15px;
-  height: 100px;
+  font-family: IBMPlexMonoMedium;
+  padding: 15px 15px 20px 15px;
   justify-content: left;
-
+  height: auto;
 }
 
 progress[value] {
   /* Reset the default appearance */
   -webkit-appearance: none;
+  height: 10px;
   appearance: none;
   padding-right: 20px;
-  width: 200px;
-  height: 10px;
+  width: 50%;
 }
 
 
@@ -164,28 +190,23 @@ progress[value]::-webkit-progress-value {
   background-color: white;
 }
 
-.WeatherManager{
-  width: 100%;
-}
+
 
 .Info{
-  width: 300px;
+  width: 90%;
   display: flex;
   justify-content: space-between;
   padding-right: 10px;
 }
 
-
-
-
 .marquee {
-  padding: 15px;
+  padding: 20px;
   border: thin solid white;
   background-color: black;
   color: white;
   font-family: IBMPlexMono;
   font-size: large;
-  height: 40px;
+  height: 50px;
   overflow: hidden;
   position: relative;
 }
@@ -223,77 +244,90 @@ progress[value]::-webkit-progress-value {
 ul {
   list-style: none;
   padding: 15px;
+  margin: 0;
 }
 
 .pothos::before{
   content: "\2022";
+  font-size: large;
   color: #ff7dab!important;
   padding-right: 5px;
 }
 
 
-.spider::before{
+.spider-plant::before{
   content: "\2022";
+  font-size: large;
   color: #f64483!important;
   padding-right: 5px;
 }
 
 .monstra::before{
   content: "\2022";
+  font-size: large;
   color: #ff71a4!important;
   padding-right: 5px;
 }
 
 .lavender::before{
   content: "\2022";
+  font-size: large;
   color: #ff84e0!important;
   padding-right: 5px;
 }
 
 .batsheva::before{
   content: "\2022";
+  font-size: large;
   color: #b75bc6!important;
   padding-right: 5px;
 }
 
 .paperumia::before{
   content: "\2022";
+  font-size: large;
   color: #6898d9!important;
   padding-right: 5px;
 }
 
 .ficus::before{
   content: "\2022";
+  font-size: large;
   color: #00b094!important;
   padding-right: 5px;
 }
 
 .alovera::before{
   content: "\2022";
+  font-size: large;
   color: #246d77!important;
   padding-right: 5px;
 }
 
 .calathea::before{
   content: "\2022";
+  font-size: large;
   color: #ea6cff!important;
   padding-right: 5px;
 }
 
 .aglaonema::before{
   content: "\2022";
+  font-size: large;
   color: #54ffc0!important;
   padding-right: 5px;
 }
 
 .asparagus-fern::before{
   content: "\2022";
+  font-size: large;
   color: #82b7ff!important;
   padding-right: 5px;
 }
 
 .yucca::before{
   content: "\2022";
+  font-size: large;
   color: #14e1ff!important;
   padding-right: 5px;
 }
@@ -301,23 +335,27 @@ ul {
 
 .air-plant::before{
   content: "\2022";
+  font-size: large;
   color: #6878d9!important;
   padding-right: 5px;
 }
 
 .english-ivy::before{
   content: "\2022";
+  font-size: large;
   color: #c65bb7!important;
   padding-right: 5px;
 }
 
 .dragon-tree::before{
   content: "\2022";
+  font-size: large;
   color: #245577!important;
   padding-right: 5px;
 }
 .bromeliad::before{
   content: "\2022";
+  font-size: large;
   color: #009ab0!important;
   padding-right: 5px;
 }

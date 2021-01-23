@@ -17,9 +17,10 @@ export class WeatherManager extends React.Component<WeatherManagerProps, any> {
         return(
             <div className="WeatherManager">
 
-                <button className="WeatherButton" onClick={()=>doRain()}><img src="https://i.ibb.co/h9qd7dP/rain.png"/></button>
-                <button className="WeatherButton" onClick={()=>doSun()}><img src="https://i.ibb.co/kMNTVt5/sun.png"/></button>
-                <button className="WeatherButton" onClick={()=>doPicture()}><img src="https://i.ibb.co/Brfth2m/camera.png"/></button>
+                <button className="WeatherButton" onClick={()=>doRain()}><img src="https://i.ibb.co/RgTHm4z/rain-new.png"/></button>
+                <button className="WeatherButton" onClick={()=>doSun()}><img src="https://i.ibb.co/VW0FMzt/sun-new.png"/></button>
+                <button className="WeatherButton" onClick={()=>doPicture()}><img src="https://i.ibb.co/P4cfmgG/camera-black-new.png"/></button>
+
             </div>
         )
     }

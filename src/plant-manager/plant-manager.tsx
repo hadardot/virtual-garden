@@ -50,7 +50,7 @@ export class PlantManager extends React.Component<PlantManagerProps, any> {
         // @ts-ignore
         return (<div className="AddPlantButtons">{plants.map(plant =>
                     <button className="AddPlantButton" onClick={()=>this.addPlant(plant)}>
-                        {plant.label}
+                        <div className={plant.value}>{plant.label}</div>
                     </button>
                         )}
             </div>
