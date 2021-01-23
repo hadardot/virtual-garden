@@ -3,24 +3,29 @@ import p5 from 'p5'
 import {plants} from "./plant-manager/plant-manager";
 
 const TWO_PI = Math.PI * 2;
-let zOff = 0;
+let counter = 0;
 
-const MAX_RAIN = 2000;
-const MAX_SUN = 2000;
+const fps = 30;
+const SCREEN_SIZE = 700;
 var isRainTime = false;
 var isSunTime = false;
 let rainTimer = 0;
 let sunTimer = 0;
+let rotation = 0;
+let rainForce = 0;
+
+
 
 
 export const doRain = () =>
 {
-    console.log("hadar is beautiful");
+    rainTimer = 0;
     isRainTime = true;
 }
 
 export const doSun = () =>
 {
+    sunTimer = 0;
     isSunTime = true;
 }
 
@@ -43,105 +48,93 @@ class Sketch extends React.Component {
     Sketch = (p) => {
 
         const gardenStartDate = new Date();
-
         // Native p5 functions work as they would normally but prefixed with
         // a p5 object "p"
         p.setup = () => {
-            p.createCanvas(700, 700);
-            p.stroke(100);
+            p.createCanvas(SCREEN_SIZE, SCREEN_SIZE);
             p.strokeWeight(1);
             p.fill(0,0,0,10);
-            p.frameRate(30);
+            p.frameRate(fps);
             p.rectMode(p.CENTER);
             p.ellipseMode(p.CENTER);
-
-
-            //console.log(gardenStartDate);
-
-            //let alternate = 1;
-            //let direction = 0;
         }
 
+
+        
         p.draw = () => {
-            p.background(0);
-            p.translate(350,350);
-
-            p.rotate(0.2*zOff);
-
-            // I = 0;
-            // const time = 1;
             // this.setState({counter: this.state.counter + time});
+            p.background(0);
+            p.translate(SCREEN_SIZE/2,SCREEN_SIZE/2);
+            counter += 0.03;
+            rotation += 0.01;
 
-
+            p.rotate(rotation);
             if (isRainTime)
             {
-                // rain
-                // timerRain ++
-                // if timer > max
-                // timer = 0;
-                // israintime = false;
+                rainTimer += 1/fps;
+                rainForce = forceOverTime(rainTimer);
+                p.rotate(rainForce);
+                if (rainTimer >= 2)  // 2 sec for rain
+                {
+                    rainTimer = 0;
+                    isRainTime = false;
+                    rotation += rainForce;
+                }
             }
-
-            if (this.props.gardensWeather === 'rain')
-            {
-
-                //if (!isRainTime)
-                //{
-                 //   rainTimer = 0;
-                //}
-                //if (rainTimer < MAX_RAIN)
-                //{
-                //    isRainTime = true;
-                //}
-                //rainTimer += 1;
-            }
-
-
-            if (this.props.gardensWeather === 'sun'){
-                //start sun draw sun
-            }
-
 
             if (this.props.isHover)
             {
                 this.props.gardensPlants.map(plant => drawHoverPlant(plant));
+            }
+            else if (isSunTime)
+            {
+                sunTimer += 1/fps;
+                if (sunTimer >= 2)  // 2 sec for sun
+                {
+                    sunTimer = 0;
+                    isSunTime = false;
+                }
+                this.props.gardensPlants.map(plant => drawPlant(plant,sunTimer));
             }
             else
             {
                 this.props.gardensPlants.map(plant => drawPlant(plant));
             }
 
-
-
-
-            zOff += 0.03;
-            p.translate(-350,-350);
+            p.translate(-SCREEN_SIZE/2,-SCREEN_SIZE/2);
         }
-
-
-
-
-        const drawPlant = (plant) => {
-            let a = 0.04;  // let a = 0.04;
-            let noise = 4;
-            p.stroke(plant.color);
-            for ( let i = 0; i < plant.index.length ; i ++)
-            {
-                let I = plant.index[i];
-                if (I < 100)   // can be in app as well max current index is 110
-                {
-                    let rr = -Math.pow(I + 10, 2) / 40 + (I + 10) * 6 - 57;
-                    drawPerlinNoiseCircle(noise + I / 15, zOff + (I / 5), rr, rr / 6 + 3, a);
-                }
-            }
-        }
-
+        
+        
         const drawHoverPlant = (plant) => {
             if(plant?.isHover){
                 drawPlant(plant);
             }
         }
+        
+        const drawPlant = (plant,sunTimer) => {
+            let a = 0.04;  // change this over radius
+            let noise = 4;
+            p.stroke(plant.color);
+            if (sunTimer)
+            {
+                //a = hexToRgb(plant.color);
+                console.log(a);
+                //p.stroke(plant.color);
+                //console.log(sunTimer);  /// 0 - 2
+                //console.log(plant.color.rgb);
+            }
 
+            for ( let i = 0; i < plant.index.length ; i ++)
+            {
+                let I = plant.index[i];
+                if (I < 30)   // can be in app as well max current index is 110
+                {
+                    let rr = -Math.pow(I + 10, 2) / 40 + (I + 10) * 6 - 57;
+                    drawPerlinNoiseCircle(noise + I / 15, counter + (I / 5), rr, rr / 6 + 3, a);
+                }
+            }
+        }
+        
         const drawPerlinNoiseCircle = (noiseMax, zOff, radius, radiusStep, aStep) =>{
 
             p.noFill();
@@ -157,6 +150,23 @@ class Sketch extends React.Component {
             p.endShape(p.CLOSE);
         }
 
+        const forceOverTime = (x) => {
+            return (erf(2*x-2)+1)*2;
+        }
+
+        const erf = (x) => {
+            let m = 1;
+            let s = 1;
+            let sum = x;
+            for(let i = 1; i < 20; i++){
+                m *= i;
+                s *= -1;
+                sum += (s * Math.pow(x, 2 * i + 1.0)) / (m * (2 * i + 1));
+            }
+            return 2 * sum / Math.sqrt(3.1415);
+        }
+
+        
     }
 
     componentDidMount() {
