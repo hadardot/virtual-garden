@@ -5,6 +5,8 @@ import {plant, PlantManager} from "../plant-manager/plant-manager";
 import {GardenManager, GetPlantAge} from "../garden-manager/garden-manager";
 import {weather, WeatherManager} from "../weather-manager/weather-manager";
 const arrows = '>>>>>';
+var monthNames = [ "January", "February", "March", "April", "May", "June",
+    "July", "August", "September", "October", "November", "December" ];
 let currentIndex = 0;
 
 interface GardenState {
@@ -43,6 +45,8 @@ class Garden extends React.Component<any,GardenState>{
             isHover:false,
             visitedOnboarding: false,
         };};
+
+    date = new Date();
 
 
 
@@ -144,8 +148,8 @@ class Garden extends React.Component<any,GardenState>{
                                        onMouseOverPlantFromGarden={this.onMouseOverPlantFromGarden}/>
                         <div className="Overview">
                             <img className="Cloudy" src="https://i.ibb.co/nsLsptq/cloudy-icon.png"/>
-                            <div>
-                                <div className="Date"></div>
+                            <div className="OverviewText">
+                                <div className="Date">{monthNames[this.date.getMonth()]+' '+this.date.getDate()+', '+this.date.getFullYear()}</div>
                                 <div className="Weather">Cloudy</div>
                             </div>
 
