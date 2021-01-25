@@ -35,6 +35,16 @@ button:focus {outline:0;}
   filter: none;
 }
 
+
+.OnboardingLogo{
+  padding: 15px;
+  width: 300px;
+  height: auto;
+}
+.OnboardingLogo:hover{
+  filter: none;
+}
+
 .Homepage{
   display: flex;
   flex-direction: column;
@@ -96,6 +106,7 @@ button:focus {outline:0;}
 .AddPlantButton:hover{
   background-color: white;
   color: black;
+  cursor: pointer;
 }
 
 
@@ -360,3 +371,19 @@ ul {
   padding-right: 5px;
 }
 
+
+.Onboarding{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: IBMPlexMono;
+  color: white;
+  margin-top: 150px;
+}
+
+.About{
+  font-family: IBMPlexMono;
+  color: white;
+
+
+}

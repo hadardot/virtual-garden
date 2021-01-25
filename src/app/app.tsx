@@ -11,7 +11,7 @@ interface GardenState {
     gardensPlants: plant[];
     gardensWeather: weather;
     isHover: boolean;
-
+    visitedOnboarding: boolean;
 
 }
 
@@ -40,8 +40,8 @@ class Garden extends React.Component<any,GardenState>{
         this.state = {
             gardensPlants: [],
             gardensWeather: null,
-
             isHover:false,
+            visitedOnboarding: false,
         };};
 
 
@@ -49,7 +49,6 @@ class Garden extends React.Component<any,GardenState>{
     componentDidMount() {
         setInterval(() => this.checkGardenPlantsIndex(5), 1000);
     }
-
 
     checkGardenPlantsIndex = (mik : number) =>
     {
@@ -66,10 +65,6 @@ class Garden extends React.Component<any,GardenState>{
         // @ts-ignore
         currPlant.index = [...currPlant.index,++currentIndex]
     }
-
-
-
-
     addPlantToGarden = (newPlant: plant) => {
         // @ts-ignore
 
@@ -96,12 +91,35 @@ class Garden extends React.Component<any,GardenState>{
     }
 
     setWeather = (currentWeather: weather) => {
-        console.log(currentWeather);
         this.setState({gardensWeather: currentWeather});
     }
 
+    setOnboarding = () => {
+        this.setState({visitedOnboarding: true})
+    }
+
     render() {
-        return (<div className="Homepage">
+        return this.state.visitedOnboarding ? this.Homepage() : this.About();
+    }
+
+
+    private About(){
+        return (<div className="About">
+            <p>GROW is a data visualization project where you can GROW your own virtual garden.<br/>
+           Each plant is represented as a color of ring made with perlin noise<br/>
+  Add house plants from your real garden and watch how they GROW as time pass<br/> and more rings are added to your virtual garden. <br/>
+  Take care of your plants by giving them sun and water.<br/>
+            and don't forget to take a picture and make memories with your virtual garden</p>
+
+            <button className="AddPlantButton" onClick={this.setOnboarding}>start GROWing</button>
+
+
+        </div>);
+    }
+
+    private Homepage() {
+        return (
+            <div className="Homepage">
                 <div className="Header">
                     <img className="Logo" src='https://i.ibb.co/BLgnTW2/grow-logo.png'/>
                     <div className="About">ABOUT</div>
@@ -124,14 +142,14 @@ class Garden extends React.Component<any,GardenState>{
                                        removePlantFromGarden={this.removePlantFromGarden}
                                        onMouseOutPlantFromGarden={this.onMouseOutPlantFromGarden}
                                        onMouseOverPlantFromGarden={this.onMouseOverPlantFromGarden}/>
-                                       <div className="Overview">
-                                           <img className="Cloudy" src="https://i.ibb.co/nsLsptq/cloudy-icon.png"/>
-                                           <div>
-                                               <div className="Date"></div>
-                                               <div className="Weather">Cloudy</div>
-                                           </div>
+                        <div className="Overview">
+                            <img className="Cloudy" src="https://i.ibb.co/nsLsptq/cloudy-icon.png"/>
+                            <div>
+                                <div className="Date"></div>
+                                <div className="Weather">Cloudy</div>
+                            </div>
 
-                                       </div>
+                        </div>
                     </div>
                 </div>
                 {Marquee()}
