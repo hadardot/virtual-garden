@@ -3,11 +3,11 @@ import * as React from 'react';
 // @ts-ignore
 import Select from 'react-select';
 
-export type plant = {value: string, label: string, dateAdded?: Date, isHover?: boolean, color?: string, index?: number[]}
+export type plant = {value: string, label: string, dateAdded?: Date, isHover?: boolean, color?: string, index?: number[], info?: string}
 //let currentIndex = 0;
 export let abandonedIndex = [];
 export const plants: plant[] = [
-    { value: 'pothos', label: 'Pothos',color: "#ff7dab"},
+    { value: 'pothos', label: 'Pothos',color: "#ff7dab", info:"I am pothos"},
     { value: 'spider-plant', label: 'Spider plant' ,color: "#f64483"},
     { value: 'monstra', label: 'Monstra',color: "#ff71a4"},
     { value: 'lavender', label: 'Lavender',color: "#ff84e0"},
@@ -43,13 +43,11 @@ export class PlantManager extends React.Component<PlantManagerProps, any> {
     }
 
 
-
-
-
     render(){
         // @ts-ignore
         return (<div className="AddPlantButtons">{plants.map(plant =>
                     <button className="AddPlantButton" onClick={()=>this.addPlant(plant)}>
+                        {/*<span className="tooltiptext">{plant?.info}</span>*/}
                         <div className={plant.value}>{plant.label}</div>
                     </button>
                         )}

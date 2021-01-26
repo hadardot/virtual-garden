@@ -49,9 +49,6 @@ class Sketch extends React.Component {
 
     // This uses p5's instance mode for sketch creation and namespacing
     Sketch = (p) => {
-
-        const gardenStartDate = new Date();
-        let canvas;
         // Native p5 functions work as they would normally but prefixed with
         // a p5 object "p"
         p.setup = () => {

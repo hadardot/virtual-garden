@@ -16,7 +16,6 @@ button:focus {outline:0;}
 
 
 .Header{
-  width: 100%;
   background-color: black;
   color: white;
   height: 80px;
@@ -98,6 +97,8 @@ button:focus {outline:0;}
   background-color: black;
   border: thin solid white;
   color: white;
+  position: relative;
+  display: inline-block;
   margin: 6px;
   padding: 5px;
 
@@ -170,7 +171,7 @@ img:hover{
 }
 
 .GardenManager{
-  height: 600px;
+  height: 460px;
   padding: 5px;
 }
 
@@ -395,4 +396,22 @@ ul {
 }
 .Date{
   padding: 15px;
+}
+
+.AddPlantButton .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  border: thin solid white;
+  text-align: center;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+}
+
+.AddPlantButton:hover .tooltiptext {
+  visibility: visible;
 }

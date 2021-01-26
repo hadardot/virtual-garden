@@ -37,6 +37,7 @@ function Marquee() {
 
 class Garden extends React.Component<any,GardenState>{
 
+
     constructor(props: any) {
         super(props);
         this.state = {
@@ -98,8 +99,12 @@ class Garden extends React.Component<any,GardenState>{
         this.setState({gardensWeather: currentWeather});
     }
 
-    setOnboarding = () => {
+    setOnboardingTrue = () => {
         this.setState({visitedOnboarding: true})
+    }
+
+    setOnboardingFalse = () => {
+        this.setState({visitedOnboarding: false})
     }
 
     render() {
@@ -115,7 +120,7 @@ class Garden extends React.Component<any,GardenState>{
   Take care of your plants by giving them sun and water.<br/>
             and don't forget to take a picture and make memories with your virtual garden</p>
 
-            <button className="AddPlantButton" onClick={this.setOnboarding}>start GROWing</button>
+            <button className="AddPlantButton" onClick={this.setOnboardingTrue}>start GROWing</button>
 
 
         </div>);
@@ -126,7 +131,7 @@ class Garden extends React.Component<any,GardenState>{
             <div className="Homepage">
                 <div className="Header">
                     <img className="Logo" src='https://i.ibb.co/BLgnTW2/grow-logo.png'/>
-                    <div className="About">ABOUT</div>
+                    <div className="About" onClick={this.setOnboardingFalse}>ABOUT</div>
                 </div>
                 <div className="App">
                     <div className="LeftSide">
