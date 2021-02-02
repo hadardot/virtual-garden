@@ -40,14 +40,13 @@ class Garden extends React.Component<any,GardenState>{
         this.state = {
             gardensPlants: [],
             gardensWeather: null,
-
             isHover:false,
         };};
 
 
 
     componentDidMount() {
-        setInterval(() => this.checkGardenPlantsIndex(5), 1000);
+        setInterval(() => this.checkGardenPlantsIndex(5), 100);
     }
 
 
@@ -59,12 +58,11 @@ class Garden extends React.Component<any,GardenState>{
     checkIndex = (currPlant : plant) =>
     {
         let age = GetPlantAge(currPlant);
-
-        //  if age > 11000
-
-
-        // @ts-ignore
-        currPlant.index = [...currPlant.index,++currentIndex]
+        if (age < 10000 && currentIndex < 100)
+        {
+            // @ts-ignore
+            currPlant.index = [...currPlant.index,++currentIndex]
+        }
     }
 
 

@@ -4,7 +4,6 @@ import {plants} from "./plant-manager/plant-manager";
 
 const TWO_PI = Math.PI * 2;
 let counter = 0;
-
 const fps = 30;
 const RAIN_TIME = 2;
 const SUN_TIME = 1;
@@ -15,6 +14,9 @@ let rainTimer = 0;
 let sunTimer = 0;
 let rotation = 0;
 let rainForce = 0;
+let shapes = {};
+
+
 
 
 export const doRain = () =>
@@ -57,13 +59,14 @@ class Sketch extends React.Component {
             p.frameRate(fps);
             p.rectMode(p.CENTER);
             p.ellipseMode(p.CENTER);
+            p.noFill();
         }
 
         p.draw = () => {
             // this.setState({counter: this.state.counter + time});
             p.background(0);
             p.translate(SCREEN_SIZE/2,SCREEN_SIZE/2);
-            counter += 0.03;
+            counter += 1;  //0.03
             rotation += 0.01;
             p.rotate(rotation);
             if (isRainTime)
@@ -97,7 +100,6 @@ class Sketch extends React.Component {
             {
                 this.props.gardensPlants.map(plant => drawPlant(plant));
             }
-
             p.translate(-SCREEN_SIZE/2,-SCREEN_SIZE/2);
         }
         
@@ -109,27 +111,41 @@ class Sketch extends React.Component {
         }
         
         const drawPlant = (plant,sunTimer) => {
-            let a = 0.04;  // change this over radius
             let noise = 4;
             p.stroke(plant.color);
             if (sunTimer)
             {
                 setStrokeColorSun(plant.color,sunTimer);
             }
-            for ( let i = 0; i < plant.index.length ; i ++)
-            {
+            for (let i = 0; i < plant.index.length; i++) {
                 let I = plant.index[i];
-                if (I < 30)   // can be in app as well max current index is 110
+                if (counter % 10 !== 0 && shapes[I] !== [])
                 {
-                    let rr = -Math.pow(I + 10, 2) / 40 + (I + 10) * 6 - 57;
-                    drawPerlinNoiseCircle(noise + I / 15, counter + (I / 5), rr, rr / 6 + 3, a);
+                    drawPerlinNoiseData(I)
+                }
+                else  //if (counter === 1 || counter % 10 === 0) {
+                {
+                    let rr = getRadius(I);
+                    let aa = getStep(rr);
+                    drawPerlinNoiseCircle(I, noise + I / 15, counter / 40 + (I / 5), rr, rr / 6 + 3, aa);  // was a not aa
                 }
             }
         }
 
-        const drawPerlinNoiseCircle = (noiseMax, zOff, radius, radiusStep, aStep) =>{
-
+        const drawPerlinNoiseData = (index) =>
+        {
             p.noFill();
+            p.beginShape();
+            let coords = shapes[index];
+            console.log(coords);
+            //coords.map(c => console.log(c));
+            //coords.map(c => p.vertex(c.xVal,c.yVal));
+            p.endShape(p.CLOSE);
+        }
+
+        const drawPerlinNoiseCircle = (index,noiseMax, zOff, radius, radiusStep, aStep) =>
+        {
+            let coords = [];
             p.beginShape();
             for (let a = 0; a < TWO_PI; a+=aStep){
                 let xoff = p.map(Math.cos(a), -1, 1, 0, noiseMax);
@@ -138,7 +154,9 @@ class Sketch extends React.Component {
                 let x = r*Math.cos(a);
                 let y = r*Math.sin(a);
                 p.vertex(x, y)
+                coords.push({xVal:x,yVal:y})
             }
+            shapes[index] = coords;
             p.endShape(p.CLOSE);
         }
 
@@ -176,7 +194,20 @@ class Sketch extends React.Component {
             return 2 * sum / Math.sqrt(3.1415);
         }
 
-        
+        const getRadius = (i) =>
+        {
+            return -Math.pow(i + 10, 2) / 40 + (i + 10) * 6 - 57;
+        }
+
+        const getStep = (rr) =>
+        {
+            let aa = (-4/3875)*rr + 159/775;
+            if (aa < 0.04)
+            {
+                aa = 0.04;
+            }
+            return aa;
+        }
     }
 
     componentDidMount() {
