@@ -19,10 +19,10 @@ interface GardenState {
 
 function Healthbars() {
     return <div className="HealthBars">
-        <progress id="file" value="22 " max="100"/>
-        22 °c
+        <progress id="file" value="18 " max="100"/>
+        18 °c
         <progress id="file" value="46" max="100"/>46% Humidity
-        <progress id="file" value="3.17" max="100"/>3 days 17 hours
+        <progress id="file" value="0.17" max="100"/>0 days 0 hours
     </div>;
 }
 
