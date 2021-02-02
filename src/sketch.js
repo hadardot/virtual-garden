@@ -125,16 +125,19 @@ class Sketch extends React.Component {
             }
             for (let i = 0; i < plant.index.length; i++) {
                 let I = plant.index[i];
-                if (counter % 5 !== 0 && shapes[I])
-                {
-                    drawPerlinNoiseData(I)
-                }
-                else  //if (counter === 1 || counter % 10 === 0) {
+                //if (counter % 2 !== 0 && shapes[I])
+                //{
+                //    drawPerlinNoiseData(I)
+                //}
+                //else  //if (counter === 1 || counter % 10 === 0) {
+                //{
+                if (I < 150)
                 {
                     let rr = getRadius(I);
                     let aa = getStep(rr);
                     drawPerlinNoiseCircle(I, noise + I / 15, counter / 40 + (I / 5), rr, rr / 6 + 3, aa);  // was a not aa
                 }
+                //}
             }
         }
 
@@ -149,7 +152,7 @@ class Sketch extends React.Component {
 
         const drawPerlinNoiseCircle = (index,noiseMax, zOff, radius, radiusStep, aStep) =>
         {
-            let coords = [];
+            //let coords = [];
             p.beginShape();
             for (let a = 0; a < TWO_PI; a+=aStep){
                 let xoff = p.map(Math.cos(a), -1, 1, 0, noiseMax);
@@ -158,9 +161,9 @@ class Sketch extends React.Component {
                 let x = r*Math.cos(a);
                 let y = r*Math.sin(a);
                 p.vertex(x, y)
-                coords.push({xVal:x,yVal:y})
+                //coords.push({xVal:x,yVal:y})
             }
-            shapes[index] = coords;
+            //shapes[index] = coords;
             p.endShape(p.CLOSE);
         }
 
