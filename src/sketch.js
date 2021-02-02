@@ -10,6 +10,7 @@ const SUN_TIME = 1;
 const SCREEN_SIZE = 700;
 var isRainTime = false;
 var isSunTime = false;
+var isPictureTime = false;
 let rainTimer = 0;
 let sunTimer = 0;
 let rotation = 0;
@@ -32,7 +33,9 @@ export const doSun = () =>
 }
 
 export const doPicture = () =>
-{}
+{
+    isPictureTime= true;
+}
 
 
 class Sketch extends React.Component {
@@ -48,8 +51,6 @@ class Sketch extends React.Component {
 
     // This uses p5's instance mode for sketch creation and namespacing
     Sketch = (p) => {
-
-        const gardenStartDate = new Date();
         // Native p5 functions work as they would normally but prefixed with
         // a p5 object "p"
         p.setup = () => {
@@ -100,16 +101,21 @@ class Sketch extends React.Component {
             {
                 this.props.gardensPlants.map(plant => drawPlant(plant));
             }
+
+            if(isPictureTime){
+                p.save('grow');
+                isPictureTime = false;
+            }
+
             p.translate(-SCREEN_SIZE/2,-SCREEN_SIZE/2);
         }
-        
-        
+
         const drawHoverPlant = (plant) => {
             if(plant?.isHover){
                 drawPlant(plant);
             }
         }
-        
+
         const drawPlant = (plant,sunTimer) => {
             let noise = 4;
             p.stroke(plant.color);
@@ -208,6 +214,8 @@ class Sketch extends React.Component {
             }
             return aa;
         }
+
+
     }
 
     componentDidMount() {

@@ -16,7 +16,6 @@ button:focus {outline:0;}
 
 
 .Header{
-  width: 100%;
   background-color: black;
   color: white;
   height: 80px;
@@ -32,6 +31,16 @@ button:focus {outline:0;}
   height: 22px;
 }
 .Logo:hover{
+  filter: none;
+}
+
+
+.OnboardingLogo{
+  padding: 15px;
+  width: 300px;
+  height: auto;
+}
+.OnboardingLogo:hover{
   filter: none;
 }
 
@@ -65,7 +74,7 @@ button:focus {outline:0;}
 .RightSide{
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  /*justify-content: space-between;*/
   border: solid white;
   border-width: 0px thin 0px thin;
   width: 400px;
@@ -88,6 +97,8 @@ button:focus {outline:0;}
   background-color: black;
   border: thin solid white;
   color: white;
+  position: relative;
+  display: inline-block;
   margin: 6px;
   padding: 5px;
 
@@ -96,13 +107,14 @@ button:focus {outline:0;}
 .AddPlantButton:hover{
   background-color: white;
   color: black;
+  cursor: pointer;
 }
 
 
 .Overview{
   display: flex;
   padding: 15px;
-  height: 120px;
+  height: 100px;
   border: solid white;
   border-width: thin 0px 0px 0px;
 }
@@ -112,8 +124,13 @@ button:focus {outline:0;}
   width: auto;
 }
 
+.Cloudy:hover{
+  filter: none;
+}
+
 .Weather{
-  font-size: medium;
+  padding: 0 15px 0 15px;
+  font-size: large;
 }
 
 .WeatherManager{
@@ -154,6 +171,7 @@ img:hover{
 }
 
 .GardenManager{
+  height: 460px;
   padding: 5px;
 }
 
@@ -360,3 +378,40 @@ ul {
   padding-right: 5px;
 }
 
+
+.Onboarding{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: IBMPlexMono;
+  color: white;
+  margin-top: 150px;
+}
+
+.About{
+  font-family: IBMPlexMono;
+  color: white;
+
+
+}
+.Date{
+  padding: 15px;
+}
+
+.AddPlantButton .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  border: thin solid white;
+  text-align: center;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+}
+
+.AddPlantButton:hover .tooltiptext {
+  visibility: visible;
+}

@@ -28,6 +28,7 @@ export class GardenManager extends React.Component<GardenManagerProps, any> {
 
         // @ts-ignore
         return(
+
             <ul>
         <div className="GardenManager">{this.props.gardensPlants.map(plant =>
             <div>
