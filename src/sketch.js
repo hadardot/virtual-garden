@@ -125,7 +125,7 @@ class Sketch extends React.Component {
             }
             for (let i = 0; i < plant.index.length; i++) {
                 let I = plant.index[i];
-                if (counter % 10 !== 0 && shapes[I] !== [])
+                if (counter % 5 !== 0 && shapes[I])
                 {
                     drawPerlinNoiseData(I)
                 }
@@ -143,9 +143,7 @@ class Sketch extends React.Component {
             p.noFill();
             p.beginShape();
             let coords = shapes[index];
-            console.log(coords);
-            //coords.map(c => console.log(c));
-            //coords.map(c => p.vertex(c.xVal,c.yVal));
+            coords && coords.map(c => {p.vertex(c.xVal,c.yVal)});
             p.endShape(p.CLOSE);
         }
 
