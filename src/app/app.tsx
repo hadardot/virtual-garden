@@ -52,7 +52,7 @@ class Garden extends React.Component<any,GardenState>{
 
 
     componentDidMount() {
-        setInterval(() => this.checkGardenPlantsIndex(5), 1000);
+        setInterval(() => this.checkGardenPlantsIndex(5), 10000);
     }
 
     checkGardenPlantsIndex = (mik : number) =>
